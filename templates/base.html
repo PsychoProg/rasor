@@ -1,0 +1,27 @@
+{% load product_tags %}
+
+<!doctype html>
+<html lang="en">
+<head>
+{% comment %} head refrences {% endcomment %}
+{% include 'shared/head_ref.html' %}
+
+<title>{% block title %}{% endblock%}</title>
+
+</head>
+<body>
+    
+{% comment %} header {% endcomment %}
+{% include 'shared/header.html' %}
+
+{% comment %} content {% endcomment %}
+{% block content %}{% endblock %}
+
+{% comment %} footer {% endcomment %}
+{% include 'shared/footer.html' %}
+
+{% comment %} footer refrences {% endcomment %}
+{% include 'shared/foot_ref.html' %}
+
+</body>
+</html>

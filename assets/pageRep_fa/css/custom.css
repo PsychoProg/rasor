@@ -1,0 +1,15 @@
+/* your styles go here */
+ul.messages li a.close {
+    margin:0;
+    float:right;
+    opacity:1;
+    border:0;
+    box-shadow:none;
+    text-shadow:none;
+}
+
+ul li{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

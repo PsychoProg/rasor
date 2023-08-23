@@ -1,0 +1,76 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/vendor/font-awesome/css/font-awesome.min.css' %}">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/css/fontastic.css' %}">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/css/style.default.css' %}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/css/custom.css' %}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static 'pageRep_fa/img/favicon.ico' %}">
+    
+    <title>{% block title %}{% endblock %}</title>
+
+
+  </head>
+  <body>
+{% if request.user.is_authenticated %}
+    <div class="container col-lg-6 mt-3">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-danger">دسترسی مجاز نیست</h4>
+            <p>ابتدا از حساب کاربری خود خارج شودی</p>
+            <hr>
+            <a href="{% url 'home:home' %}" class="mb-0 alert alert-link">بازگشت به صفحه اصلی</a>
+        </div>
+    </div>
+{% else %}
+<div class="page login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>خوش آمدید</h1>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                {% block content %}{% endblock %}
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+    <!-- Javascript files-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="{% static 'pageRep_fa/vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'pageRep_fa/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'pageRep_fa/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'pageRep_fa/vendor/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'pageRep_fa/vendor/jquery-validation/jquery.validate.min.js' %}"></script>
+    <!-- Main File-->
+    <script src="{% static 'pageRep_fa/js/front.js' %}"></script>
+    </body>
+</html>

@@ -7,6 +7,9 @@ name = "pypi"
 django = "*"
 django-debug-toolbar = "*"
 pillow = "*"
+django-taggit = "*"
+markdown = "*"
+django-widget-tweaks = "*"
 
 [dev-packages]
 
