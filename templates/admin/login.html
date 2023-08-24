@@ -1,0 +1,53 @@
+{% extends "admin/login.html" %}
+{% load static %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+#header {
+    background-color: transparent !important;
+}
+
+@font-face {
+    font-family: Ubuntu-Regular;
+    src: url('{% static 'rasor_admin/fonts/Ubuntu-Regular.ttf' %}'); 
+}
+
+@font-face {
+    font-family: Ubuntu-Italic;
+    src: url('{% static 'rasor_admin/fonts/Ubuntu-Italic.ttf' %}'); 
+}
+
+@font-face {
+    font-family: Ubuntu-Bold;
+    src: url('{% static 'rasor_admin/fonts/Ubuntu-Bold.ttf'%}'); 
+}
+
+h1{
+    font-family: ubuntu-bold;
+}
+
+p{
+    font-family: ubuntu-regular;
+}
+label{
+    font-family: ubuntu-italic;
+}
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1>
+  <span style="color: #57C5A5 !important">Rasor</span>
+  <br />
+  <small>{% block head_title %}{% endblock %}</small>
+</h1>
+
+{% endblock %}
+
+{% block content_title %}
+<p class="lead" style="font-size: larger">
+A Simple Tool for Leaders, Coaches, and Counselors.
+</p>
+{% endblock %}

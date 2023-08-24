@@ -4,7 +4,9 @@ pipenv run pip freeze > requirements.txt
 Add multiple images to post 
 https://stackoverflow.com/questions/34006994/how-to-upload-multiple-images-to-a-blog-post-in-django
 
-========================================================== markdown safestring 
+========================================================== template tags 
+markdown safestring:
+
 >> app_name/templatetags/app_tags.py 
 
 from django import template
@@ -27,8 +29,8 @@ https://aminbahrami.ir/blog/9-%D9%81%D8%A7%D8%B1%D8%B3%DB%8C-%D8%B3%D8%A7%D8%B2%
 right ==> rriigghhtt
 left ==> right
 rriigghhtt ==> left
-==========================================================
-
+========================================================== CKEditor 
+https://django-ckeditor.readthedocs.io/en/latest/#installation
 
 
 ==========================================================

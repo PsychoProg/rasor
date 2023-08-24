@@ -10,6 +10,7 @@ pillow = "*"
 django-taggit = "*"
 markdown = "*"
 django-widget-tweaks = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 

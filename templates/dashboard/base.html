@@ -1,0 +1,86 @@
+{% load static %}
+{% load product_tags %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/vendor/font-awesome/css/font-awesome.min.css' %}">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/css/fontastic.css' %}">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/css/style.default.css' %}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static 'pageRep_fa/css/custom.css' %}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static 'pageRep_fa/img/favicon.ico' %}">
+    
+    <title>{% block title %}{% endblock %}</title>
+    
+  </head>
+  <body>
+{% include 'dashboard/shared/header.html' %}
+
+
+{% include 'dashboard/shared/sidebar.html' %}
+
+  <h1>Hello world!</h1>
+  <br>
+  {% comment %}  {% endcomment %}
+  <div class="card-deck">
+    <div class="card text-right">
+      <img class="card-img-top" src="{% static 'pageRep_fa/img/template-mac.png' %}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card text-right">
+      <img class="card-img-top" src="{% static 'pageRep_fa/img/template-mac.png' %}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+
+    <div class="card text-right">
+      <img class="card-img-top" src="{% static 'pageRep_fa/img/template-mac.png' %}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+  {% comment %}  {% endcomment %}
+  <br>
+  <hr>
+  {% comment %} content {% endcomment %}
+  {% block content %}{% endblock %}     
+
+          <!-- Page Footer-->
+{% include 'dashboard/shared/footer.html' %}
+    <!-- Javascript files-->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="{% static 'pageRep_fa/vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'pageRep_fa/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'pageRep_fa/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'pageRep_fa/vendor/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'pageRep_fa/vendor/jquery-validation/jquery.validate.min.js' %}"></script>
+    <!-- Main File-->
+    <script src="{% static 'pageRep_fa/js/front.js' %}"></script>
+
+  </body>
+</html>

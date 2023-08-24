@@ -29,7 +29,7 @@
 
   </head>
   <body>
-{% if request.user.is_authenticated %}
+{% comment %} {% if request.user.is_authenticated %}
     <div class="container col-lg-6 mt-3">
         <div class="alert alert-danger" role="alert">
             <h4 class="alert-danger">دسترسی مجاز نیست</h4>
@@ -38,7 +38,7 @@
             <a href="{% url 'home:home' %}" class="mb-0 alert alert-link">بازگشت به صفحه اصلی</a>
         </div>
     </div>
-{% else %}
+{% endif %} {% endcomment %}
 <div class="page login-page">
     <div class="container d-flex align-items-center">
         <div class="form-holder has-shadow">
@@ -61,7 +61,7 @@
         </div>
     </div>
 </div>
-{% endif %}
+
 
     <!-- Javascript files-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

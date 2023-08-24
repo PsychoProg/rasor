@@ -7,8 +7,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
     path('home/', include('home.urls')),
-    path('products/', include('product.urls')),
+    path('blog/', include('blog.urls')),
     path('account/', include('account.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     # path('', include('django.contrib.auth.urls')),
 
 ]
