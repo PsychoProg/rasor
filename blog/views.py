@@ -16,3 +16,7 @@ def product_list(request, tag_slug=None):
         'tags': tags,
     }
     return render(request, 'dashboard/products_list.html', context)
+
+
+def testview(request):
+    return render(request, 'product/products_list.html', {})

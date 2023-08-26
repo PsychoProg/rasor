@@ -33,6 +33,20 @@ rriigghhtt ==> left
 https://django-ckeditor.readthedocs.io/en/latest/#installation
 
 
-==========================================================
+========================================================== Gallery 
+{% for item in images %}
+      {% if forloop.counter0|divisibleby:3 %}
+        gallery-section 
+        row 
+      {% endif %}
+        gallery images 
+      {% if forloop.counter|divisibleby:3 or forloop.last %}
+        div 
+        div 
+      {% endif %}
+{% empty %}
+        <p style='text-align:center'>No products yet.</p>
+{% endfor %}
+
 ==========================================================
 ==========================================================

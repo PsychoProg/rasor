@@ -2,18 +2,52 @@
 {% load static %}
 {% load product_tags %}
 
+{% block extrastyel %}
+
+{% endblock %}
+
 {% block title%}
 محصولات
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    {% for item in products %}
-        
-        {{ item.title }}
-        <br>
-        {{ item.description|markdown|truncatewords_html:30 }}
 
+    {% comment %} 
+    {{ item.content|markdown|truncatewords_html:10 }}
+    {% endcomment %}
+
+  {% for item in products %}
+  {% if forloop.counter0|divisibleby:3 %}
+    <section style="background-color: #eee;">
+    <div class="card-deck" >
+  {% endif %}
+      <div class="card text-right">
+          <img class="card-img-top" src="{{ item.image.url }}" alt="{{ item.title }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <p class="card-text">{{ item.content|markdown|truncatewords_html:20 }}</p>
+            </div>
+            <div class="align-self-center">  
+              <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">مشاهده</a>
+            </div>
+            <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+
+  {% if forloop.counter|divisibleby:3 or forloop.last %}
+  </div>
+  </section>
+  {% endif %}
+  
+  {% empty %}
+    <p style='text-align:center'>No products yet.</p>
+  
     {% endfor %}
-</div>
+
+
+  
+
 {% endblock %}
+
+
