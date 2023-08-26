@@ -1,9 +1,210 @@
-{% extends 'base.html' %}
+{% extends 'home/base.html' %}
+{% load static %}
+{% load product_tags %}
 
 {% block title %}
-home
+Home
 {% endblock %}
 
+
 {% block content %}
-<h1>Home</h1>
+<section class="engine"><a rel="external" href="https://mobirise.com">Site Builder</a></section><section class="mbr-slider mbr-section mbr-section__container carousel slide mbr-section-nopadding mbr-after-navbar" data-ride="carousel" data-keyboard="false" data-wrap="true" data-pause="false" data-interval="10000" id="slider-h">
+    <div>
+        <div>
+            <div>
+                <ol class="carousel-indicators">
+                    <li data-app-prevent-settings="" data-target="#slider-h" class="active" data-slide-to="0"></li><li data-app-prevent-settings="" data-target="#slider-h" data-slide-to="1"></li><li data-app-prevent-settings="" data-target="#slider-h" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    {% comment %} list box {% endcomment %}
+                    {% for item in list_items %}
+                    {% comment %} active html class cause display list box {% endcomment %}
+                    <div class="mbr-section mbr-section-hero carousel-item dark center mbr-section-full {% if forloop.counter0 %}active{% endif %}" data-bg-video-slide="false" style="background-image: url({{ item.image.url }});">
+                        <div class="mbr-table-cell">
+                            <div class="mbr-overlay"></div>
+                            <div class="container-slide container">
+
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-3 text-xs-right">
+                                        <h2 class="mbr-section-title display-1">{{ item.title }}</h2>
+                                        <p class="mbr-section-lead lead">{{ item.body }}</p>
+                                        <div class="mbr-section-btn"><a class="btn btn-lg btn-info" href="https://mobirise.com">ثبت نام اساتید</a> <a class="btn btn-lg btn-white btn-white-outline" href="https://mobirise.com">ورود اساتید</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% comment %} end list {% endcomment %}
+                     
+                </div>
+
+                <a data-app-prevent-settings="" class="left carousel-control" role="button" data-slide="prev" href="#slider-h">
+                    <span class="icon-prev" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a data-app-prevent-settings="" class="right carousel-control" role="button" data-slide="next" href="#slider-h">
+                    <span class="icon-next" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mbr-section mbr-section__container article" id="header3-i" style="background-color: rgb(255, 255, 255); padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="mbr-section-title display-2">سایت آموزشی پل علم</h3>
+                <small class="mbr-section-subtitle">نویسنده: سروش فرزامی</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mbr-section article mbr-section__container" id="content2-j" style="background-color: rgb(255, 255, 255); padding-top: 20px; padding-bottom: 20px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 lead"><p>پل علم، مکانی امن برای فراگرفتن و آموزش دادن و کسب تجربه و به اشتراک گذاشتن تجربیات ارزشمدن شما در زمینه های مختلف می باشد. می توان با تهیه ی فیلم یا کلیپ های تصویری بسیاری از تجاربی که با هزینه های زیاد کسب کرده اید را در اختیار دیگران قرار دهید و از این طریق کسب درامد نمایید. می توانید در هر زمینه ای قبل از آنکه به آن وارد شوید، و یا در طول انجام آن، آموزشهای مربوطه را کسب نموده و از تجارب متخصصین آن زمینه با کمترین هزینه استفاده نمایید.</p><p><strong>هر شخصی در پل علم می تواند هم دانشجو باشد و کسب علم نماید و هم استاد یا معلم باشد و کسب درآمد دائمی کند.</strong></p><p></p><div style="text-align: right;"></div><p></p></div>
+        </div>
+    </div>
+
+</section>
+
+<hr>
+<br>
+{% comment %} products {% endcomment %}
+{% for product in products %}
+{% if forloop.counter0|divisibleby:3 %}
+<section class="mbr-cards mbr-section mbr-section-nopadding" id="features3-m" style="background-color: rgb(255, 255, 255);">
+    {% endif %}
+    <div class="mbr-cards-col col-xs-12 col-lg-4" style="padding-top: 0px; padding-bottom: 40px;">
+            <div class="container">
+                <div class="card cart-block">
+                    <div class="card-img"><img src="{{ product.image.url }}" class="card-img-top"></div>
+                    <div class="card-block">
+                        <h4 class="card-title">{{ product.title }}</h4>
+                        <h5 class="card-subtitle">{{ product.author }}</h5>
+                        <p class="card-text">{{ product.content|markdown|truncatewords_html:30}}</p>
+                        <div class="card-btn"><a href="#" class="btn btn-primary">بیشتر</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+{% if forloop.counter|divisibleby:3 or forloop.last %}        
+</section>
+{% endif %}
+{% empty %}
+    <div class='container'>
+        <h1> no news</h1>
+    </div>
+{% endfor %}
+{% comment %} end products {% endcomment %}
+
+<section class="mbr-section mbr-parallax-background" id="content5-n" style="background-image: url({% static 'home/images/mbr-1-2000x1334.jpg' %}); padding-top: 120px; padding-bottom: 160px;">
+
+    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 0, 0);">
+    </div>
+
+    <div class="container">
+        <h3 class="mbr-section-title display-2">از پیش دبستانی تا کنکور</h3>
+        <div class="lead"><p><span style="font-size: 1.07rem; line-height: 1.5;">تک تک لحظات زندگی که فرزندانمان در این سال های طولانی که بهترین سال های زندگی آنان می باشد، طی می کنند، می تواند پر از نشاط و شادی و زیرکی و خلاقیت باشد.</span></p><p>احتمالا همگی ما به این نتیجه ی تاسف آور رسیده ایم که عنصر خلاقیت از سیستم آموزش و پرورش حذف شده و جای آن را حجم مطالب و کتاب های سنگین پر کرده است که مهمترین خصوصیت یک انسان که همان خلاقیت است را از او می گیرد و جای آن را به بازی با نمرات و تکالیف درسی می دهد.در عدم حضور خلاقیت شاید فرزندانمان با اخذ نمرات عالی سالهای زندگی خود را طی کنند و به ظاهر موفق باشند ولی بدون تربیت شدن ذهن خلاق خود، عملا و حقیقتا هیچگونه موفقیتی را حاصل نکرده اند. عناصر اولیه برای یک زندگی موفق مخصوصا در آینده، خلاقیت و ایجاد گروه و فعالیت در کار های گروهی است که عملا در هیچ کجای آموزش و پرورش دیده نمی شود. در پل علم بر گسترش خلاقیت و توانایی انجام کارهای گروهی تاکید می شود.</p></div>
+    </div>
+
+</section>
+<hr>
+<br>
+
+{% comment %} news {% endcomment %}
+{% for item in news %}
+{% if forloop.counter0|divisibleby:4 %}
+<section class="mbr-cards mbr-section mbr-section-nopadding" id="features3-m" style="background-color: rgb(255, 255, 255);">
+    {% endif %}
+    <div class="mbr-cards-col col-xs-12 col-lg-4" style="padding-top: 0px; padding-bottom: 40px;">
+            <div class="container">
+                <div class="card cart-block">
+                    <div class="card-img"><img src="{{ item.image.url }}" class="card-img-top"></div>
+                    <div class="card-block">
+                        <h4 class="card-title">{{ item.title }}</h4>
+                        <h5 class="card-subtitle">{{ item.author }}</h5>
+                        <p class="card-text">{{ item.content|markdown|truncatewords_html:100}}</p>
+                        <div class="card-btn"><a href="#" class="btn btn-primary">بیشتر</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+{% if forloop.counter|divisibleby:4 or forloop.last %}        
+</section>
+{% endif %}
+{% empty %}
+    <div class='container'>
+        <h1> no news</h1>
+    </div>
+{% endfor %}
+{% comment %} end news {% endcomment %}
+<hr>
+<br>
+
+<section class="mbr-section mbr-section-md-padding mbr-footer footer2 mbr-parallax-background" id="contacts2-p" style="background-image: url({% static 'home/images/mbr-2000x1071.jpg' %}); padding-top: 90px; padding-bottom: 90px;">
+    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(60, 60, 60);"></div>
+    <div class="container">
+        <div class="row">
+            <div class="mbr-footer-content col-xs-12 col-md-3">
+                <p></p><p><font color="#7c7c7c" face="Montserrat, sans-serif" size="3"><span style="letter-spacing: -1px; line-height: 20px;"><strong>آدرس</strong></span></font><br>شاهرود، سمنان، ایران<br><br><br><font color="#7c7c7c" face="Montserrat, sans-serif" size="3"><span style="letter-spacing: -1px; line-height: 20px;"><strong>تماس</strong></span></font><br>
+Email: host@polelm.com<br><br></p><p></p>
+            </div>
+            <div class="mbr-footer-content col-xs-12 col-md-3"><p class="mbr-contacts__text"><strong>آدرس</strong></p><ul><li>کلاس ها</li><li>داشبورد دانشجویان</li><li>داشبورد اساتید</li></ul></div>
+            <div class="col-xs-12 col-md-6">
+                <div class="mbr-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0Dx_boXQiwvdz8sJHoYeZNVTdoWONYkU&amp;q=place_id:ChIJ2dzzH0kAjj8RvCRwVnxps_A" allowfullscreen=""></iframe></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mbr-section mbr-section-md-padding" id="social-buttons1-q" style="background-color: rgb(255, 255, 255); padding-top: 90px; padding-bottom: 90px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-xs-center">
+                <h3 class="mbr-section-title display-2">پل علم را به اشتراک بگذارید</h3>
+                <div>
+
+                  <div class="mbr-social-likes" data-counters="false">
+                    <span class="btn btn-social facebook" title="Share link on Facebook">
+                        <i class="socicon socicon-facebook"></i>
+                    </span>
+                    <span class="btn btn-social twitter" title="Share link on Twitter">
+                        <i class="socicon socicon-twitter"></i>
+                    </span>
+                    <span class="btn btn-social plusone" title="Share link on Google+">
+                        <i class="socicon socicon-googleplus"></i>
+                    </span>
+
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mbr-section mbr-section-md-padding mbr-parallax-background" id="social-buttons2-r" style="background-image: url({% static 'home/images/mbr-1-2000x1334.jpg' %}); padding-top: 90px; padding-bottom: 90px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-xs-center">
+                <h3 class="mbr-section-title display-2">پل علم را دنبال کنید</h3>
+                <div><a class="btn btn-social" title="Twitter" target="_blank" href="https://twitter.com/mobirise"><i class="socicon socicon-twitter"></i></a> <a class="btn btn-social" title="Facebook" target="_blank" href="https://www.facebook.com/pages/Mobirise/1616226671953247"><i class="socicon socicon-facebook"></i></a> <a class="btn btn-social" title="Google+" target="_blank" href="https://plus.google.com/u/0/+Mobirise/posts"><i class="socicon socicon-googleplus"></i></a> <a class="btn btn-social" title="YouTube" target="_blank" href="https://www.youtube.com/channel/UCt_tncVAetpK5JeM8L-8jyw"><i class="socicon socicon-youtube"></i></a> <a class="btn btn-social" title="Instagram" target="_blank" href="https://instagram.com/mobirise/"><i class="socicon socicon-instagram"></i></a> <a class="btn btn-social" title="Pinterest" target="_blank" href="https://www.pinterest.com/mobirise/"><i class="socicon socicon-pinterest"></i></a> <a class="btn btn-social" title="Tumblr" target="_blank" href="http://mobirise.tumblr.com/"><i class="socicon socicon-tumblr"></i></a> <a class="btn btn-social" title="LinkedIn" target="_blank" href="https://www.linkedin.com/in/mobirise"><i class="socicon socicon-linkedin"></i></a> <a class="btn btn-social" title="VKontakte" target="_blank" href="#"><i class="socicon socicon-vkontakte"></i></a> <a class="btn btn-social" title="Odnoklassniki" target="_blank" href="#"><i class="socicon socicon-odnoklassniki"></i></a> </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+{% include 'home/shared/head_ref.html' %}
+
+<title>{% block title %}{% endblock %}</title>
+
+</head>
+<body class="rtl">
+{% include 'home/shared/header.html' %}
+
+
+{% block content %}
+{% endblock %}
+
+
+{% include 'home/shared/footer.html' %}
+
+{% include 'home/shared/foot_ref.html' %}
+
+<input name="animation" type="hidden">
+<div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a></div>
+</body>
+</html>
