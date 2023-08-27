@@ -30,7 +30,8 @@ class ListBox(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-    
+        verbose_name = 'تصویر صفحه اصلی '
+        verbose_name_plural = 'تصاویر صفحه اصلی'
 
 
 class News(models.Model):
@@ -54,6 +55,7 @@ class News(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-    
+        verbose_name = 'خبر'
+        verbose_name_plural = 'اخبار'
 
 

@@ -43,9 +43,10 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'ckeditor',
     'ckeditor_uploader',
-    'home.apps.HomeConfig',
-    'blog.apps.BlogConfig',
     'account.apps.AccountConfig',
+    'blog.apps.BlogConfig',
+    'dashboard.apps.DashboardConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [

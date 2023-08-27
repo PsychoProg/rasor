@@ -42,7 +42,9 @@ class Product(models.Model):
     
     class Meta:
         ordering=['-updated_at']
-
+        verbose_name = 'محصول'
+        verbose_name_plural = 'محصولات'
+        
     def get_absolute_url(self):
         return reverse('blog:products_list', kwargs={'pk': self.pk, 'slug': self.slug })
 

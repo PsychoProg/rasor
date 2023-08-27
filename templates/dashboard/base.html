@@ -1,61 +1,61 @@
 {% load static %}
-{% load product_tags %}
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/vendor/bootstrap/css/bootstrap.min.css' %}">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/vendor/font-awesome/css/font-awesome.min.css' %}">
-    <!-- Fontastic Custom icon font-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/css/fontastic.css' %}">
-    <!-- Google fonts - Poppins -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/css/style.default.css' %}" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/css/custom.css' %}">
-    <!-- Favicon-->
+<html lang="en">
+    <head>
+    {% include 'dashboard/shared/head_ref.html' %}
     
-    <link rel="shortcut icon" href="{% static 'pageRep_fa/img/favicon.ico' %}">
-    
-
-    
-    {% block extrastyel %}{% endblock %}
-
     <title>{% block title %}{% endblock %}</title>
-    
   </head>
-  <body>
-    {% include 'dashboard/shared/header.html' %}
+
+<body class="nav-md text-right">
+  <div class="container body">
+  <div class="main_container">
+  {% comment %} sidebar {% endcomment %}
+  {% include 'dashboard/shared/sidebar.html' %}
+
+  {% comment %} navigation bar {% endcomment %}
+  {% include 'dashboard/shared/navigation.html' %}
 
 
-    {% include 'dashboard/shared/sidebar.html' %}
+<!-- page content -->
+<div class="right_col text-right" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_right">
+        <h3>{% block page_title %}{% endblock %}</h3>
+      </div>
+      
+      {% include 'dashboard/shared/search.html' %}
 
-    <br>
-    <hr>
+    <div class="clearfix"></div>
 
-    {% comment %} content {% endcomment %}
-    {% block content %}{% endblock %}     
+    <div class="row">
+      <div class="col-md-12">
+        <div class="x_panel">
+          
+          <div class="x_content">
+            {% comment %} content {% endcomment %}
+              {% block content %}
 
-    <!-- Page Footer-->
-    {% include 'dashboard/shared/footer.html' %}
-    <!-- Javascript files-->
+              {% endblock %}
+            
+            <div class="container">
+                <h1>hello</h1>
+            </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="{% static 'pageRep_fa/vendor/popper.js/umd/popper.min.js' %}"> </script>
-    <script src="{% static 'pageRep_fa/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'pageRep_fa/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
-    <script src="{% static 'pageRep_fa/vendor/chart.js/Chart.min.js' %}"></script>
-    <script src="{% static 'pageRep_fa/vendor/jquery-validation/jquery.validate.min.js' %}"></script>
-    <!-- Main File-->
-    <script src="{% static 'pageRep_fa/js/front.js' %}"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- /page content -->
 
-  </body>
+  {% comment %} footer {% endcomment %}
+  {% include 'dashboard/shared/footer.html' %}
+
+
+  {% include 'dashboard/shared/foot_ref.html' %}
+
+</body>
 </html>

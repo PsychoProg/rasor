@@ -119,9 +119,9 @@ Home
 <hr>
 <br>
 
-{% comment %} news {% endcomment %}
+{% comment %}
 {% for item in news %}
-{% if forloop.counter0|divisibleby:4 %}
+{% if forloop.counter0|divisibleby:3 %}
 <section class="mbr-cards mbr-section mbr-section-nopadding" id="features3-m" style="background-color: rgb(255, 255, 255);">
     {% endif %}
     <div class="mbr-cards-col col-xs-12 col-lg-4" style="padding-top: 0px; padding-bottom: 40px;">
@@ -130,8 +130,8 @@ Home
                     <div class="card-img"><img src="{{ item.image.url }}" class="card-img-top"></div>
                     <div class="card-block">
                         <h4 class="card-title">{{ item.title }}</h4>
-                        <h5 class="card-subtitle">{{ item.author }}</h5>
-                        <p class="card-text">{{ item.content|markdown|truncatewords_html:100}}</p>
+                        <h5 class="card-subtitle">{{ product.author }}</h5>
+                        <p class="card-text">{{ product.content|markdown|truncatewords_html:30}}</p>
                         <div class="card-btn"><a href="#" class="btn btn-primary">بیشتر</a></div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@ Home
         </div>
         
     </div>
-{% if forloop.counter|divisibleby:4 or forloop.last %}        
+{% if forloop.counter|divisibleby:3 or forloop.last %}        
 </section>
 {% endif %}
 {% empty %}
@@ -147,7 +147,36 @@ Home
         <h1> no news</h1>
     </div>
 {% endfor %}
-{% comment %} end news {% endcomment %}
+ {% endcomment %}
+{% for item in news %}
+{% if forloop.counter0|divisibleby:4%}
+<section class="mbr-cards mbr-section mbr-section-nopadding" id="features6-o" style="background-color: rgb(239, 239, 239);">
+<div class="mbr-cards-row row">
+{% endif %}
+        <div class="mbr-cards-col col-xs-12 col-lg-3" style="padding-top: 80px; padding-bottom: 80px;">
+            <div class="container">
+              <div class="card cart-block">
+                  <div class="card-img"><img src="{{ item.image.url }}" class="card-img-top"></div>
+                  <div class="card-block">
+                    <h4 class="card-title">{{ item.title }}</h4>
+                    
+                    <p class="card-text">{{ item.content|markdown|truncatewords_html:100 }}</p>
+                    <div class="card-btn"><a href="https://mobirise.com" class="btn btn-primary">بیشتر</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+{% if forloop.counter|divisibleby:4 or forloop.last %}
+</div>
+</section>
+{% endif %}
+
+{% empty %}
+<div class='container'>
+    <h1> no news</h1>
+</div>
+{% endfor %}
 <hr>
 <br>
 

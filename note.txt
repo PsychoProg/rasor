@@ -48,5 +48,10 @@ https://django-ckeditor.readthedocs.io/en/latest/#installation
         <p style='text-align:center'>No products yet.</p>
 {% endfor %}
 
-==========================================================
+========================================================== regex
+search:
+\b(src|href)="([^"]*)"\b
+
+change:
+$1="{% static '$2' %}"
 ==========================================================
