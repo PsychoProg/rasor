@@ -38,11 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # apps
+    'bootstrap5',
+    'ckeditor',
+    'ckeditor_uploader',
     'debug_toolbar',
     'taggit',
     'widget_tweaks',
-    'ckeditor',
-    'ckeditor_uploader',
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
     'dashboard.apps.DashboardConfig',
@@ -151,39 +152,20 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'logout'
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# email verification
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mirzaeea450@gmail.com'   # set your email
+EMAIL_HOST_PASSWORD = 'vfsbuhhnvdjzqlkd'    # paste the key or password app here
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'default from email'
 
 # ckeditor
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'
-
-# CKEDITOR_CONFIGS = {
-#     'awesome_ckeditor': {
-#         'toolbar': 'Basic',
-#     },
-# }
-
-# add config to all RichTextField
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'full',
-#         'height': 300,
-#         'width': 300,
-#     },
-# }
-
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'Custom',
-#         'toolbar_Custom': [
-#             ['Bold', 'Italic', 'Underline'],
-#             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-#             ['Link', 'Unlink'],
-#             ['RemoveFormat', 'Source']
-#         ]
-#     }
-# }
 
 
 CKEDITOR_CONFIGS = {

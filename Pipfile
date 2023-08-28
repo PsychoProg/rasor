@@ -11,6 +11,7 @@ django-taggit = "*"
 markdown = "*"
 django-widget-tweaks = "*"
 django-ckeditor = "*"
+django-bootstrap-v5 = "*"
 
 [dev-packages]
 

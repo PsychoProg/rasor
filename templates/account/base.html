@@ -1,76 +1,62 @@
 {% load static %}
-{% load widget_tweaks %}
-
+{% load bootstrap5 %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/vendor/bootstrap/css/bootstrap.min.css' %}">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/vendor/font-awesome/css/font-awesome.min.css' %}">
-    <!-- Fontastic Custom icon font-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/css/fontastic.css' %}">
-    <!-- Google fonts - Poppins -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/css/style.default.css' %}" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="{% static 'pageRep_fa/css/custom.css' %}">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="{% static 'pageRep_fa/img/favicon.ico' %}">
-    
+    <!-- Bootstrap -->
+    <link href="{% static 'dashboard/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'dashboard/vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'dashboard/vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="{% static 'dashboard/vendors/animate.css/animate.min.css' %}" rel="stylesheet">
+    <!-- custom css -->
+    <link href="{% static 'dashboard/build/css/custom.rtl.css' %}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{% static 'dashboard/build/css/custom.min.css' %}" rel="stylesheet">
+
     <title>{% block title %}{% endblock %}</title>
+    
+    <style>
+        
+        @font-face {
+            font-family: iran-sans;
+            src: url('{% static 'fonts/IRANSans.ttf' %}');
+        }
+        @font-face {
+            font-family: iran-sans-bold;
+            src: url('{% static 'fonts/IRANSans_Bold.ttf' %}');
+        }
+        .login_content h1{
+            font-family: irans-sans-bold;
+        }
+        *{
+            font-family: iran-sans;
+        }
+        h1 {
+            font-family: iran-sans-bold
+        }
+    </style>
+    {% block extrastyle %}
+    {% endblock %}
+</head>
 
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+      <div class="login_wrapper">
 
-  </head>
-  <body>
-{% comment %} {% if request.user.is_authenticated %}
-    <div class="container col-lg-6 mt-3">
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-danger">دسترسی مجاز نیست</h4>
-            <p>ابتدا از حساب کاربری خود خارج شودی</p>
-            <hr>
-            <a href="{% url 'home:home' %}" class="mb-0 alert alert-link">بازگشت به صفحه اصلی</a>
+        {% block content%}
+        {% endblock %}
         </div>
+      </div>
     </div>
-{% endif %} {% endcomment %}
-<div class="page login-page">
-    <div class="container d-flex align-items-center">
-        <div class="form-holder has-shadow">
-            <div class="row">
-                <!-- Logo & Information Panel-->
-                <div class="col-lg-6">
-                    <div class="info d-flex align-items-center">
-                        <div class="content">
-                            <div class="logo">
-                                <h1>خوش آمدید</h1>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                {% block content %}{% endblock %}
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    <!-- Javascript files-->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="{% static 'pageRep_fa/vendor/popper.js/umd/popper.min.js' %}"> </script>
-    <script src="{% static 'pageRep_fa/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'pageRep_fa/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
-    <script src="{% static 'pageRep_fa/vendor/chart.js/Chart.min.js' %}"></script>
-    <script src="{% static 'pageRep_fa/vendor/jquery-validation/jquery.validate.min.js' %}"></script>
-    <!-- Main File-->
-    <script src="{% static 'pageRep_fa/js/front.js' %}"></script>
-    </body>
+  </body>
 </html>

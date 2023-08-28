@@ -1,0 +1,59 @@
+{% extends 'account/base.html' %}
+{% load widget_tweaks %}
+{% load bootstrap5 %}
+
+{% block title %}
+ثبت نام
+{% endblock %}
+
+
+{% block content %}
+
+<div class="animate form login_form">
+    <section class="login_content">
+    
+    <form method="post">
+         {% csrf_token %}
+        <h1>ثبت نام</h1>
+        {% if form.errors %}
+        <ul style="list-style-type: none;">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li class="text text-danger" style="none" onclick="this.parentElement.style.display='none';"> {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+        {% endif %}   
+        {% comment %} fields  {% endcomment %}
+           <div>
+            {% render_field form.username type="text" class+="text-right form-control" placeholder="نام کاربری" %}
+        </div>
+           <div>
+            {% render_field form.email type="email" class+="text-right form-control" placeholder="ایمیل" %}
+        </div>
+        <div>
+            {% render_field form.password type="password" class+="text-right form-control" placeholder="رمز عبور" %}
+        </div>
+        <div>
+            {% render_field form.password2 type="password" class+="text-right form-control" placeholder="تکرار رمز عبور" %}
+        </div> 
+        {% comment %} end fields {% endcomment %}
+        <div>   
+            <button class="btn btn-default submit" type="submit">تایید</button>
+        </div>
+        <div class="clearfix"></div>
+        <div class="separator">
+          <p class="change_link  text-right"> قبلا ثبت نام کرده اید!
+              <a href="{% url 'register' %}" class="to_register">ورود به حساب کاربری</a>
+            </p>
+            <div class="clearfix"></div>
+            <br /> 
+            <div>
+                <h1><i class="fa fa-paw"></i> Rasor</h1>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint, harum!</p>
+            </div>
+        </div>
+    </form>
+    </section>
+    </div>
+{% endblock %}

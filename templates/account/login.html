@@ -6,45 +6,45 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="animate form login_form">
+<section class="login_content">
+
+<form method="post">
+     {% csrf_token %}
+    <h1>وارد شوید</h1>
     
-    <!-- Form Panel    -->
-    <div class="col-lg-6 bg-white">
-        <div class="form d-flex align-items-center">
-        <div class="content">
-            
-            <form id="login-form" method="post">
-            {% csrf_token %}
-
-            {% if form.errors %}
-                <ul style="list-style-type: none;">
-                    <li class="{{ message.tags }}" style="none" onclick="this.parentElement.style.display='none';">
-                    <p class="p-3 mb-2 bg-secondary text-white">نام کاربری یا رمز عبور اشتباه است</p>
-                    </li>
-                </ul>
-            {% endif %}
-            
-            <br>
-            <div class="form-group">
-                {% render_field form.username type="text" class+="input-material"%}
-                <label for="login-username" class="label-material">نام کاربری</label>
-            </div>
-            <div class="form-group">
-                {% render_field form.password type="password" class+="input-material"%}
-                <label for="login-password" class="label-material">رمز عبور</label>
-            </div>
-            <p><input type="submit" value="ورود" class="btn btn-primary"></p>
-            
-            <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-            </form>
-            <a href="{% url 'password_reset' %}" class="forgot-pass">رمز عبور خود را فراموش کرده‌اید؟</a>
-            <br>
-            <a href="register.html" class="signup">ایجاد حساب کاربری</a>
-
-        </div>
-        </div>
+    {% if form.errors %}
+        <ul style="list-style-type: none;">
+            <li class="text text-danger" style="none" onclick="this.parentElement.style.display='none';">نام کاربری یا رمز عبور اشتباه است</li>
+        </ul>
+    {% endif %}
+    
+    <div>
+        {% render_field form.username type="text" class+="text-right form-control" placeholder="نام کاربری" %}        
+    </div>
+    <div>
+        {% render_field form.password type="password" class+="text-right form-control" placeholder="رمز عبور" %}        
+    </div>
+    <div>
+        <a class="reset_pass text-right" href="{% url 'password_reset' %}">بازیابی رمز عبور</a>
+        <button class="btn btn-default submit" type="submit" href="{% url 'home:home' %}">ورود</button>
     </div>
     
-<script>
+    <div class="clearfix"></div>
     
-</script>
+    <div class="separator">
+      <p class="change_link  text-right">
+          <a href="{% url 'register' %}" class="to_register">ایجاد حساب کاربری</a>
+        </p>
+        <div class="clearfix"></div>
+        <br /> 
+        <div>
+            <h1><i class="fa fa-paw"></i> Rasor</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint, harum!</p>
+        </div>
+    </div>
+</form>
+</section>
+</div>
 {% endblock %}

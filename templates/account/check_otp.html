@@ -1,0 +1,24 @@
+{% extends 'account/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+کد تایید
+{% endblock %}
+
+{% block content %}
+    
+<section class="login_content">    
+  <form method="post">
+    {% csrf_token %}
+
+  <h1>کد یکبار مصرف</h1>
+  <p>کد ارسال شده به ایمیل خود را وارد کنید</p>  
+
+  {% render_field form.code class="form-control" placeholder="*****" %}
+  <div>
+    {% comment %} <a class="reset_pass text-right" href="{% url 'check_otp_url' %}">ارسال مجدد کد تایید</a> {% endcomment %}
+    <button class="btn btn-default submit" type="submit">تایید</button>
+  </div>
+  </form>
+</section>
+{% endblock %}
