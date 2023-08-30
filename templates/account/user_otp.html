@@ -1,0 +1,37 @@
+{% extends 'account/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+ورود
+{% endblock %}
+
+{% block content %}
+
+<div class="animate form login_form">
+<section class="login_content">
+
+<form method="post">
+     {% csrf_token %}
+    <h1>کد تایید</h1>
+    {%if error%}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+</div>
+{%endif%}
+        <p class="text-muted text-right">
+            کد ارسال شده را وارد کنید
+        </p>
+        <form method="post">
+            {%csrf_token%}
+            {%include 'account/form_snippets.html' with center=True form=form%}             
+            
+            <button class="btn btn-default submit" type="submit" href="{% url 'home:home' %}">تایید</button>
+        </form>    
+    </div>
+</div>    
+</section>
+</div>
+{% endblock %}
+
+
+

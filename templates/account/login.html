@@ -19,9 +19,13 @@
             <li class="text text-danger" style="none" onclick="this.parentElement.style.display='none';">نام کاربری یا رمز عبور اشتباه است</li>
         </ul>
     {% endif %}
-    
+    {%if error%}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+    {%endif%}
     <div>
-        {% render_field form.username type="text" class+="text-right form-control" placeholder="نام کاربری" %}        
+        {% render_field form.username_or_email type="text" class+="text-right form-control" placeholder="نام کاربری" %}        
     </div>
     <div>
         {% render_field form.password type="password" class+="text-right form-control" placeholder="رمز عبور" %}        

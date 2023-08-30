@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'dashboard.apps.DashboardConfig',
     'home.apps.HomeConfig',
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -88,8 +89,12 @@ WSGI_APPLICATION = 'rasor.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rasor',
+        'USER': 'jcob', 
+        'PASSWORD': 'PassWord',
+        'HOST': 'localhost',        
+        'PORT': '5432',
     }
 }
 
@@ -161,6 +166,10 @@ EMAIL_HOST_PASSWORD = 'vfsbuhhnvdjzqlkd'    # paste the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'default from email'
+
+AUTHENTICATION_BACKENDS = [
+    'account.backends.EmailOrUsernameModelBackend',
+]
 
 # ckeditor
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"

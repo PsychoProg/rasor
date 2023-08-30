@@ -5,11 +5,11 @@ class Profile(models.Model):
     pass 
 
 
-class Otp(models.Model):
-    token = models.CharField(max_length=255, null=True)
-    email = models.EmailField(max_length=254)
-    pass_code = models.SmallIntegerField()
-    expiration_date = models.DateTimeField(auto_now_add=True)
+class OtpCode(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    code = models.CharField(max_length=20, unique=True)
+    email = models.EmailField(blank=True)
 
     def __str__(self):
-        return self.email
+        return self.code

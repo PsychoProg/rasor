@@ -24,18 +24,24 @@
             {% endfor %}
         </ul>
         {% endif %}   
+
+        {%if error%}
+            <div class="alert alert-danger" role="alert">
+                {{error}}
+            </div>
+        {%endif%}
         {% comment %} fields  {% endcomment %}
            <div>
-            {% render_field form.username type="text" class+="text-right form-control" placeholder="نام کاربری" %}
+            {{ form.username }}
         </div>
            <div>
-            {% render_field form.email type="email" class+="text-right form-control" placeholder="ایمیل" %}
+           {{ form.email }}
         </div>
         <div>
-            {% render_field form.password type="password" class+="text-right form-control" placeholder="رمز عبور" %}
+            {{ form.password1 }}
         </div>
         <div>
-            {% render_field form.password2 type="password" class+="text-right form-control" placeholder="تکرار رمز عبور" %}
+            {{ form.password2 }}
         </div> 
         {% comment %} end fields {% endcomment %}
         <div>   

@@ -5,10 +5,13 @@ from . import views
 
 
 urlpatterns = [
-    path("login/", views.MyLoginView.as_view(), name='login'),
-    # path("login/", auth_views.LoginView.as_view(template_name='account/login.html'), name='login'),
-    path('register/', views.RegisterView.as_view(), name='register'),
-    path('check-otp', views.CheckOtpView.as_view(), name='check_otp_url'),
+    path('login/', views.login_view, name='login'),
+    path('register/', views.registeration_view, name='register'),
+    path('reset-code/', views.check_reset_otp_view, name='reset_code'),
+    path('activate-email/', views.check_otp_view, name='activate_email'),
+    # path("login/", views.MyLoginView.as_view(), name='login'),
+    # path('register/', views.RegisterView.as_view(), name='register'),
+
     path("logout/", auth_views.LogoutView.as_view(template_name='account/logout.html'), name="logout"),
     path(
         "password_change/", 
