@@ -4,7 +4,7 @@ from django.contrib import messages
 from random import randint
 from django.shortcuts import redirect, render
 from .forms import CustomLoginForm, RegisterForm, OtpForm
-from .models import OtpCode
+from .models import OtpCode, Profile
 from .utils import send_activation_code
 from core.decorators import redirect_authenticated_user
 
@@ -38,6 +38,8 @@ def registeration_view(request):
         form = RegisterForm(request.POST or None)
         if form.is_valid():
             user = form.save(commit=False)
+            # profile = Profile(user=user)
+            # profile.save()
             user.is_active = False
             user.save(True)
 

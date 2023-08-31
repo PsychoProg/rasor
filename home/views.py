@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import ListBox, News
 from blog.models import Product
+from core.decorators import mentor_required
 
 
 def home_view(request):

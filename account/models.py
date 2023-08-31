@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from PIL import Image
-
+from django.contrib.auth.models import User
 USER = get_user_model()
 
 
@@ -31,8 +31,6 @@ class ValidateProfile(models.Model):
         ARTISAN = 'ARTISAN', _('Artisan')
         
     user = models.OneToOneField(USER, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=155)
-    last_name = models.CharField(max_length=155)
     gender = models.CharField(choices=Gender.choices, default=Gender.MALE)
     validate_image = models.ImageField(upload_to='validation_image/%Y/%m/%d/')
     register_as = models.CharField(choices=UserRole.choices, default=UserRole.STUDENT)    
@@ -64,7 +62,7 @@ class Profile(models.Model):
     is_student = models.BooleanField(default=False)    
     is_mentor = models.BooleanField(default=False)
     is_artisan = models.BooleanField(default=False)
-
+    profile_done = models.BooleanField(default=False)
 
     @property
     def get_user_role(self):
@@ -81,10 +79,11 @@ class Profile(models.Model):
 
 
     def __str__(self):
-        return '{} ({})'.format(self.username, self.get_full_name)
+        if self.user.first_name and self.user.last_name:
+            return f"{self.user.first_name} {self.user.last_name} Profile"
+        else:
+            return f"{self.user.username} Profile"
 
-    
-    
     def get_picture(self):
         try:
             return self.picture.url

@@ -34,6 +34,10 @@ class RegisterForm(UserCreationForm):
 
         self.fields['username'].widget = widgets.TextInput(
             attrs={'placeholder': "نام کاربری", "class": "form-control text-right"})
+        self.fields['first_name'].widget = widgets.TextInput(
+            attrs={'placeholder': "نام", "class": "form-control text-right"})
+        self.fields['last_name'].widget = widgets.TextInput(
+            attrs={'placeholder': "نام خانوادگی", "class": "form-control text-right"})
         self.fields['email'].widget = widgets.EmailInput(
             attrs={'placeholder': "ایمیل", "class": "form-control text-right"})
         self.fields['password1'].widget = widgets.PasswordInput(
@@ -61,11 +65,14 @@ class RegisterForm(UserCreationForm):
         if password1 and password2:
             if password1 != password2:
                 raise forms.ValidationError("رمز عبور هخوانی ندارد")
+        if password1 and password2 and password1 == password2:
+            if len(password1) <= 8 or len(password1) > 40:
+                raise forms.ValidationError("تعداد کاراکترهای رمز عبور مناسب نیست")
         return password2
 
     class Meta:
         model = USER
-        fields = ("username", "email")
+        fields = ("username", "email", "first_name", "last_name")
 
 
 
