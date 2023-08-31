@@ -38,7 +38,7 @@ class ListBox(models.Model):
 
 class News(models.Model):
     title = models.CharField(max_length=255)
-    # author = models.ForeignKey(USER, on_delete=models.PROTECT, related_name='news')
+    author = models.ForeignKey(USER, on_delete=models.PROTECT, related_name='news')
     content = RichTextField()
     image = models.ImageField(upload_to='home/news/%Y/%m')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,12 +62,14 @@ class News(models.Model):
 
 
 class PageContent1(models.Model):
+    title = models.CharField(max_length=155, null=True, blank=True)
+    author = models.ForeignKey(USER, on_delete=models.PROTECT)
     content = models.TextField()
     active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.content:20}"
+        return f"{self.title}"
 
     class Meta:
         verbose_name = 'متن صفحه بخش اول'
@@ -75,12 +77,13 @@ class PageContent1(models.Model):
 
 
 class PageContent2(models.Model):
+    title = models.CharField(max_length=155, null=True, blank=True)
     content = models.TextField()
     active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.content:20}"
+        return f"{self.title}"
 
     class Meta:
         verbose_name = 'متن صفحه بخش دوم'
@@ -93,10 +96,18 @@ class CompanyInfo(models.Model):
     city = models.CharField(max_length=155, null=True, blank=True)
     phone = models.CharField(max_length=13, null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'اطلاعات شرکت'
+        verbose_name_plural = 'اطلاعات شرکت'
 
 class ShareLinks(models.Model):
     instagram = models.CharField(max_length=255)
     telegram = models.CharField(max_length=255)
     gmail = models.CharField(max_length=255)
     youtube = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = 'لینک'
+        verbose_name_plural = 'لینک ها'
+
 

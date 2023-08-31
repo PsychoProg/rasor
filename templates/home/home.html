@@ -28,7 +28,14 @@ Home
                                     <div class="col-md-8 col-md-offset-3 text-xs-right">
                                         <h2 class="mbr-section-title display-1">{{ item.title }}</h2>
                                         <p class="mbr-section-lead lead">{{ item.body }}</p>
-                                        <div class="mbr-section-btn"><a class="btn btn-lg btn-info" href="https://mobirise.com">ثبت نام اساتید</a> <a class="btn btn-lg btn-white btn-white-outline" href="https://mobirise.com">ورود اساتید</a></div>
+                                        <div class="mbr-section-btn">
+                                        {% if request.user.is_authenticated %}
+                                        <a class="btn btn-lg btn-info" href="{% url 'logout' %}">خروچ از حساب</a> 
+                                        <a class="btn btn-lg btn-white btn-white-outline" href="{% url 'dashboard:dashboard' %}">داشبورد</a></div>
+                                        {% else %}
+                                            <a class="btn btn-lg btn-info" href="{% url 'register' %}">ثبت نام</a> 
+                                            <a class="btn btn-lg btn-white btn-white-outline" href="{% url 'login' %}">ورود</a></div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -56,8 +63,10 @@ Home
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h3 class="mbr-section-title display-2">سایت آموزشی پل علم</h3>
-                <small class="mbr-section-subtitle">نویسنده: سروش فرزامی</small>
+                {% if page_content_1 %}
+                <h3 class="mbr-section-title display-2">{{ page_content_1.title }}</h3>
+                <small class="mbr-section-subtitle">نویسنده: {{ page_content_1.author.first_name}} {{ page_content_1.author.last_name}}</small>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -67,7 +76,9 @@ Home
 
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 lead"><p>پل علم، مکانی امن برای فراگرفتن و آموزش دادن و کسب تجربه و به اشتراک گذاشتن تجربیات ارزشمدن شما در زمینه های مختلف می باشد. می توان با تهیه ی فیلم یا کلیپ های تصویری بسیاری از تجاربی که با هزینه های زیاد کسب کرده اید را در اختیار دیگران قرار دهید و از این طریق کسب درامد نمایید. می توانید در هر زمینه ای قبل از آنکه به آن وارد شوید، و یا در طول انجام آن، آموزشهای مربوطه را کسب نموده و از تجارب متخصصین آن زمینه با کمترین هزینه استفاده نمایید.</p><p><strong>هر شخصی در پل علم می تواند هم دانشجو باشد و کسب علم نماید و هم استاد یا معلم باشد و کسب درآمد دائمی کند.</strong></p><p></p><div style="text-align: right;"></div><p></p></div>
+            {% if page_content_1 %}
+            <div class="col-xs-12 lead"><p>{{ page_content_1.content|markdown }}</strong></p><p></p><div style="text-align: right;"></div><p></p></div>
+            {% endif %}
         </div>
     </div>
 
@@ -111,43 +122,16 @@ Home
     </div>
 
     <div class="container">
-        <h3 class="mbr-section-title display-2">از پیش دبستانی تا کنکور</h3>
-        <div class="lead"><p><span style="font-size: 1.07rem; line-height: 1.5;">تک تک لحظات زندگی که فرزندانمان در این سال های طولانی که بهترین سال های زندگی آنان می باشد، طی می کنند، می تواند پر از نشاط و شادی و زیرکی و خلاقیت باشد.</span></p><p>احتمالا همگی ما به این نتیجه ی تاسف آور رسیده ایم که عنصر خلاقیت از سیستم آموزش و پرورش حذف شده و جای آن را حجم مطالب و کتاب های سنگین پر کرده است که مهمترین خصوصیت یک انسان که همان خلاقیت است را از او می گیرد و جای آن را به بازی با نمرات و تکالیف درسی می دهد.در عدم حضور خلاقیت شاید فرزندانمان با اخذ نمرات عالی سالهای زندگی خود را طی کنند و به ظاهر موفق باشند ولی بدون تربیت شدن ذهن خلاق خود، عملا و حقیقتا هیچگونه موفقیتی را حاصل نکرده اند. عناصر اولیه برای یک زندگی موفق مخصوصا در آینده، خلاقیت و ایجاد گروه و فعالیت در کار های گروهی است که عملا در هیچ کجای آموزش و پرورش دیده نمی شود. در پل علم بر گسترش خلاقیت و توانایی انجام کارهای گروهی تاکید می شود.</p></div>
+        {% if page_content_2 %}
+        <h3 class="mbr-section-title display-2">{{ page_content_2.title }}</h3>
+        <div class="lead"><p><span style="font-size: 1.07rem; line-height: 1.5;">{{ page_content_2.content|markdown }}</p></div>
+        {% endif %}
     </div>
 
 </section>
 <hr>
 <br>
 
-{% comment %}
-{% for item in news %}
-{% if forloop.counter0|divisibleby:3 %}
-<section class="mbr-cards mbr-section mbr-section-nopadding" id="features3-m" style="background-color: rgb(255, 255, 255);">
-    {% endif %}
-    <div class="mbr-cards-col col-xs-12 col-lg-4" style="padding-top: 0px; padding-bottom: 40px;">
-            <div class="container">
-                <div class="card cart-block">
-                    <div class="card-img"><img src="{{ item.image.url }}" class="card-img-top"></div>
-                    <div class="card-block">
-                        <h4 class="card-title">{{ item.title }}</h4>
-                        <h5 class="card-subtitle">{{ product.author }}</h5>
-                        <p class="card-text">{{ product.content|markdown|truncatewords_html:30}}</p>
-                        <div class="card-btn"><a href="#" class="btn btn-primary">بیشتر</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-{% if forloop.counter|divisibleby:3 or forloop.last %}        
-</section>
-{% endif %}
-{% empty %}
-    <div class='container'>
-        <h1> no news</h1>
-    </div>
-{% endfor %}
- {% endcomment %}
 {% for item in news %}
 {% if forloop.counter0|divisibleby:4%}
 <section class="mbr-cards mbr-section mbr-section-nopadding" id="features6-o" style="background-color: rgb(239, 239, 239);">

@@ -19,6 +19,9 @@ class OtpCode(models.Model):
     def __str__(self):
         return self.code
 
+    class Meta:
+        verbose_name = 'کد فعال سازی'
+        verbose_name_plural = 'کد های فعال سازی'
 
 class ValidateProfile(models.Model):
     class Gender(models.TextChoices):
@@ -34,7 +37,14 @@ class ValidateProfile(models.Model):
     gender = models.CharField(choices=Gender.choices, default=Gender.MALE)
     validate_image = models.ImageField(upload_to='validation_image/%Y/%m/%d/')
     register_as = models.CharField(choices=UserRole.choices, default=UserRole.STUDENT)    
-    
+
+    def __str__(self):
+        return f"{self.user.username}"
+
+    class Meta:
+        verbose_name = 'تایید پروفایل'
+        verbose_name_plural = 'تایید پروفایل ها'
+
     @property
     def get_full_name(self):
         full_name = self.username
@@ -109,6 +119,10 @@ class Profile(models.Model):
         if self.picture.url != settings.MEDIA_URL + 'default.png':
             self.picture.delete()
         super().delete(*args, **kwargs)
+
+    class Meta:
+            verbose_name = 'پروفایل'
+            verbose_name_plural = 'پروفایل ها'
 
 
 class Student(models.Model):

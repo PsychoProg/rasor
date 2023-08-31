@@ -2,7 +2,7 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
     <div class="navbar nav_title" style="border: 0;">
-      <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+      <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Rasor</span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -10,10 +10,10 @@
     <!-- menu profile quick info -->
     <div class="profile clearfix">
       <div class="profile_pic">
-        <img src="{% static 'dashboard/images/img.jpg' %}" alt="..." class="img-circle profile_img">
+        <img src="{{ request.user.profiles.image.url }}" alt="user profile image" class="img-circle profile_img">
       </div>
       <div class="profile_info">
-        <h2>نام کاربری</h2>
+        <h2>{{ request.user.first_name }} {{ request.user.last_name }}</h2>
         
       </div>
     </div>

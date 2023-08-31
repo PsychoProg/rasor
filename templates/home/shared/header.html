@@ -8,8 +8,8 @@
                 <div class="mbr-table-cell">
 
                     <div class="navbar-brand">
-                        <a href="https://mobirise.com" class="navbar-logo"><img src="{% static 'home/images/mbr-193x128.jpg' %}" alt="Mobirise"></a>
-                        <a class="navbar-caption text-info" href="index.html">پل علم</a>
+                        <a href="{% url 'home:home' %}" class="navbar-logo"><img src="{% static 'home/images/mbr-193x128.jpg' %}" alt="Mobirise"></a>
+                        <a class="navbar-caption text-info" href="{% url 'home:home' %}">پل علم</a>
                     </div>
 
                 </div>
@@ -19,7 +19,16 @@
                         <div class="hamburger-icon"></div>
                     </button>
 
-                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">یک معلم شوید</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li><li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">آکادمیک</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li><li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">مشاغل</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li><li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">تجارب</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li><li class="nav-item nav-btn"><a class="nav-link btn btn-secondary-outline btn-secondary" href="{% static 'admin/webForms/pages/cms_signIn.aspx' %}">ورود</a></li></ul>
+                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar">
+                        <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">یک معلم شوید</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li>
+                        <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">آکادمیک</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li>
+                        <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">مشاغل</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li>
+                        <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">تجارب</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li>
+                        {% if request.user.is_authenticated%}
+                          <li class="nav-item nav-btn"><a class="nav-link btn btn-secondary-outline btn-secondary" href="{% url 'logout' %}">خروج</a></li></ul>
+                        {% else %}
+                            <li class="nav-item nav-btn"><a class="nav-link btn btn-secondary-outline btn-secondary" href="{% url 'login' %}">ورود</a></li></ul>
+                        {% endif %}
                     <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
                         <div class="close-icon"></div>
                     </button>

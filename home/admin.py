@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import ListBox, News 
+from . import models
 
 
-@admin.register(ListBox)
+@admin.register(models.ListBox)
 class ListBoxAdmin(admin.ModelAdmin):
     list_display = ['title', 'status', 'created_at', 'id']
     list_filter = ['created_at'] 
@@ -12,11 +12,22 @@ class ListBoxAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(News)
+@admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['title', 'status', 'created_at', 'id']
-    # list_filter = ['created_at', 'author'] 
+    list_filter = ['created_at', 'author'] 
     search_fields = ['id', 'title']
     date_hierarchy = 'created_at'
     ordering = ['created_at']
 
+
+@admin.register(models.PageContent1)
+class PageContent1Admin(admin.ModelAdmin):
+    list_display = ['title', 'author']
+
+@admin.register(models.PageContent2)
+class PageContent2Admin(admin.ModelAdmin):
+    list_display = ['title']
+    
+admin.site.register(models.CompanyInfo)
+admin.site.register(models.ShareLinks)
