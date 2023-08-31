@@ -15,7 +15,7 @@ class ListBoxAdmin(admin.ModelAdmin):
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['title', 'status', 'created_at', 'id']
-    list_filter = ['created_at', 'author'] 
+    # list_filter = ['created_at', 'author'] 
     search_fields = ['id', 'title']
     date_hierarchy = 'created_at'
     ordering = ['created_at']

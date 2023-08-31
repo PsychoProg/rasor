@@ -171,6 +171,9 @@ AUTHENTICATION_BACKENDS = [
     'account.backends.EmailOrUsernameModelBackend',
 ]
 
+# AUTH_USER_MODEL = "account.User"
+
+
 # ckeditor
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"

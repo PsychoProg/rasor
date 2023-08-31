@@ -2,11 +2,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import validate_email
-from django.contrib.auth.models import User 
+from django.contrib.auth import get_user_model
 from django.forms import widgets
 from django import forms
 from .models import OtpCode
 
+USER = get_user_model()
 
 class CustomLoginForm(forms.Form):
     username_or_email = forms.CharField(widget=forms.TextInput)
@@ -20,8 +21,8 @@ class CustomLoginForm(forms.Form):
         else:
             data = {'username': username_or_email}
         try:
-            User.objects.get(**data)
-        except User.DoesNotExist:
+            USER.objects.get(**data)
+        except USER.DoesNotExist:
             raise ValidationError(
                 _('این {} موجود نیست'.format(list(data.keys())[0])))
         else:
@@ -42,14 +43,14 @@ class RegisterForm(UserCreationForm):
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
-        qs = User.objects.filter(username__iexact=username)
+        qs = USER.objects.filter(username__iexact=username)
         if qs.exists():
             raise forms.ValidationError("این نام کاربری نامعتبر است")
         return username
     
     def clean_email(self):
         email = self.cleaned_data.get("email")
-        qs = User.objects.filter(email__iexact=email)
+        qs = USER.objects.filter(email__iexact=email)
         if qs.exists():
             raise forms.ValidationError("ایمیل نامعتبر است")
         return email
@@ -63,7 +64,7 @@ class RegisterForm(UserCreationForm):
         return password2
 
     class Meta:
-        model = User
+        model = USER
         fields = ("username", "email")
 
 
