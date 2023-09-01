@@ -19,7 +19,7 @@ Home
                     {% comment %} list box {% endcomment %}
                     {% for item in list_items %}
                     {% comment %} active html class cause display list box {% endcomment %}
-                    <div class="mbr-section mbr-section-hero carousel-item dark center mbr-section-full {% if forloop.counter0 %}active{% endif %}" data-bg-video-slide="false" style="background-image: url({{ item.image.url }});">
+                    <div class="mbr-section mbr-section-hero carousel-item dark center mbr-section-full {% if forloop.first %}active{% endif %}" data-bg-video-slide="false" style="background-image: url({{ item.image.url }});">
                         <div class="mbr-table-cell">
                             <div class="mbr-overlay"></div>
                             <div class="container-slide container">

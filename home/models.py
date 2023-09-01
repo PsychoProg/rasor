@@ -4,13 +4,14 @@ from django.db.models.query import QuerySet
 from django.utils.translation import gettext_lazy as _ 
 from django.contrib.auth import get_user_model
 from ckeditor.fields import RichTextField
+from PIL import Image
 
 USER = get_user_model()
 
 class CustomManager(models.Manager):
     """ Return only published items """
     def get_queryset(self) -> QuerySet:
-        return super().get_queryset()
+        return super().get_queryset().filter(status='PB')
 
 
 class ListBox(models.Model):
@@ -59,6 +60,17 @@ class News(models.Model):
         ordering = ['-created_at']
         verbose_name = 'خبر'
         verbose_name_plural = 'اخبار'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        try:
+            img = Image.open(self.picture.path)
+            if img.height > 300 or img.width > 400:
+                output_size = (300, 400)
+                img.thumbnail(output_size)
+                img.save(self.picture.path)
+        except:
+            pass
 
 
 class PageContent1(models.Model):
