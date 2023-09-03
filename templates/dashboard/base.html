@@ -1,10 +1,34 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
     {% include 'dashboard/shared/head_ref.html' %}
     
     <title>{% block title %}{% endblock %}</title>
+
+    <style>
+      @font-face{
+        font-family: iransans;
+        src: url('{% static 'fonts/IRANSans.ttf' %}')
+    }
+    *{
+        font-family: iransans;
+    }
+    h1, h2, h3, h4, label{
+        font-family: iransans;
+    }
+    .font-iransans{
+        font-family: iransans;
+    }
+
+    #my_form p label,
+    #my_form p input{
+    float: right;
+    clear: right;
+    text-align: rtl;
+    }
+    </style>
   </head>
 
 <body class="nav-md text-right">
@@ -38,10 +62,6 @@
               {% block content %}
 
               {% endblock %}
-            
-            <div class="container">
-                <h1>hello</h1>
-            </div>
 
           </div>
         </div>

@@ -6,6 +6,23 @@
 
 <title>{% block title %}{% endblock %}</title>
 
+<style>
+    @font-face{
+        font-family: iransans;
+        src: url('{% static 'fonts/IRANSans.ttf' %}')
+    }
+    *{
+        font-family: iransans;
+    }
+    h1, h2, h3, h4{
+        font-family: iransans;
+    }
+    .font-iransans{
+        font-family: iransans;
+    }
+
+</style>
+
 </head>
 <body class="rtl">
 {% include 'home/shared/header.html' %}

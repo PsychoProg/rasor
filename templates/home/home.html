@@ -33,8 +33,8 @@ Home
                                         <a class="btn btn-lg btn-info" href="{% url 'logout' %}">خروچ از حساب</a> 
                                         <a class="btn btn-lg btn-white btn-white-outline" href="{% url 'dashboard:dashboard' %}">داشبورد</a></div>
                                         {% else %}
-                                            <a class="btn btn-lg btn-info" href="{% url 'register' %}">ثبت نام</a> 
-                                            <a class="btn btn-lg btn-white btn-white-outline" href="{% url 'login' %}">ورود</a></div>
+                                            <a class="font-iransans btn btn-lg btn-info" href="{% url 'register' %}">ثبت نام</a> 
+                                            <a class="font-iransans btn btn-lg btn-white btn-white-outline" href="{% url 'login' %}">ورود</a></div>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -64,7 +64,8 @@ Home
         <div class="row">
             <div class="col-xs-12">
                 {% if page_content_1 %}
-                <h3 class="mbr-section-title display-2">{{ page_content_1.title }}</h3>
+                <h3 class="font-iransans mbr-section-title display-2">{{ page_content_1.title }}</h3>
+                <br>
                 <small class="mbr-section-subtitle">نویسنده: {{ page_content_1.author.first_name}} {{ page_content_1.author.last_name}}</small>
                 {% endif %}
             </div>
@@ -144,7 +145,7 @@ Home
                   <div class="card-block">
                     <h4 class="card-title">{{ item.title }}</h4>
                     
-                    <p class="card-text">{{ item.content|markdown|truncatewords_html:100 }}</p>
+                    <p class="card-text">{{ item.content|markdown|truncatewords_html:60 }}</p>
                     <div class="card-btn"><a href="https://mobirise.com" class="btn btn-primary">بیشتر</a> </div>
                     </div>
                 </div>

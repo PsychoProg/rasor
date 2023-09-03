@@ -56,17 +56,19 @@ class ValidateProfile(models.Model):
 
 class Profile(models.Model):
     class DegreeChoice(models.TextChoices):
-        PHD = 'PHD', _('Phd')
-        POSTGRADUATED = 'POSTGRADUATED', _('postgraduated')
-        UNDERGRADUATED = 'UNDERGRADUATED', _('undergraduated')
-        ASSOCIATE_OF_ART = 'ASSOCIATE_OF_ART', _('associate_of_art')
-        ASSOCIATE_OF_SCIENCE = 'ASSOCIATE_OF_SCIENCE', _('associate_of_science')
-
+        PHD = 'PHD', _('دکتری')
+        POSTGRADUATED = 'Postgraduated', _('کارشناسی ارشد')
+        UNDERGRADUATED = 'Undergraduated', _('کارشناسی')
+        ASSOCIATE_OF_ART = 'Associate_of_art', _('دیپلم کاردانی')
+        ASSOCIATE_OF_SCIENCE = 'Associate_of_science', _('دیپلم تجربی')
+        ASSOCIATE_OF_MATH = 'Associate_of_math', _('دیپلم ریاضی')
+        ASSOCIATE_OF_LIBERAL_ARTS = 'Associate_of_liberal_arts', _('دیپلم انسانی')
+        
     user = models.OneToOneField(USER, on_delete=models.CASCADE, related_name='profiles')
-    degree = models.CharField(choices=DegreeChoice.choices, null=True)
-    phone = models.CharField(max_length=12, null=True, blank=True)
+    degree = models.CharField(choices=DegreeChoice.choices, default=DegreeChoice.ASSOCIATE_OF_SCIENCE)
+    phone = models.CharField(max_length=12)
     image = models.ImageField(upload_to='profile_pictures/%Y/%m/%d/', default='default.png', null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=255)
     # Role
     is_dep_head = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)    
@@ -76,9 +78,7 @@ class Profile(models.Model):
 
     @property
     def get_user_role(self):
-        if self.is_superuser:
-            return "Admin"
-        elif self.is_dep_head:
+        if self.is_dep_head:
             return "DepartmentHead"
         elif self.is_mentor:
             return "Mentor"
