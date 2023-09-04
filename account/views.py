@@ -4,7 +4,7 @@ from django.contrib import messages
 from random import randint
 from django.shortcuts import redirect, render
 from .forms import CustomLoginForm, RegisterForm, OtpForm
-from .models import OtpCode, Profile
+from .models import OtpCode
 from .utils import send_activation_code
 from core.decorators import redirect_authenticated_user
 
@@ -17,6 +17,7 @@ def login_view(request):
         if form.is_valid():
             user = authenticate(
                 request, username=form.cleaned_data['username_or_email'], password=form.cleaned_data['password'])
+            
             if user:
                 if not user.is_active:
                     messages.warning(request, _(

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'taggit',
     'widget_tweaks',
     'account.apps.AccountConfig',
+    'django_cleanup.apps.CleanupConfig',
     'blog.apps.BlogConfig',
     'dashboard.apps.DashboardConfig',
     'home.apps.HomeConfig',
@@ -171,7 +172,7 @@ AUTHENTICATION_BACKENDS = [
     'account.backends.EmailOrUsernameModelBackend',
 ]
 
-# AUTH_USER_MODEL = "account.User"
+AUTH_USER_MODEL = "core.User"
 
 
 # ckeditor

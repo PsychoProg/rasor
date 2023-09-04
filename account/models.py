@@ -37,6 +37,8 @@ class ValidateProfile(models.Model):
     gender = models.CharField(choices=Gender.choices, default=Gender.MALE)
     validate_image = models.ImageField(upload_to='validation_image/%Y/%m/%d/')
     register_as = models.CharField(choices=UserRole.choices, default=UserRole.STUDENT)    
+    is_validate = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return f"{self.user.username}"
@@ -51,78 +53,6 @@ class ValidateProfile(models.Model):
         if self.first_name and self.last_name:
             full_name = self.first_name + " " + self.last_name
         return full_name
-
-    
-
-class Profile(models.Model):
-    class DegreeChoice(models.TextChoices):
-        PHD = 'PHD', _('دکتری')
-        POSTGRADUATED = 'Postgraduated', _('کارشناسی ارشد')
-        UNDERGRADUATED = 'Undergraduated', _('کارشناسی')
-        ASSOCIATE_OF_ART = 'Associate_of_art', _('دیپلم کاردانی')
-        ASSOCIATE_OF_SCIENCE = 'Associate_of_science', _('دیپلم تجربی')
-        ASSOCIATE_OF_MATH = 'Associate_of_math', _('دیپلم ریاضی')
-        ASSOCIATE_OF_LIBERAL_ARTS = 'Associate_of_liberal_arts', _('دیپلم انسانی')
-        
-    user = models.OneToOneField(USER, on_delete=models.CASCADE, related_name='profiles')
-    degree = models.CharField(choices=DegreeChoice.choices, default=DegreeChoice.ASSOCIATE_OF_SCIENCE)
-    phone = models.CharField(max_length=12)
-    image = models.ImageField(upload_to='profile_pictures/%Y/%m/%d/', default='default.png', null=True)
-    address = models.CharField(max_length=255)
-    # Role
-    is_dep_head = models.BooleanField(default=False)
-    is_student = models.BooleanField(default=False)    
-    is_mentor = models.BooleanField(default=False)
-    is_artisan = models.BooleanField(default=False)
-    profile_done = models.BooleanField(default=False)
-
-    @property
-    def get_user_role(self):
-        if self.is_dep_head:
-            return "DepartmentHead"
-        elif self.is_mentor:
-            return "Mentor"
-        elif self.is_student:
-            return "Student"
-        elif self.is_artisan:
-            return "Artisan"
-
-
-    def __str__(self):
-        if self.user.first_name and self.user.last_name:
-            return f"{self.user.first_name} {self.user.last_name} Profile"
-        else:
-            return f"{self.user.username} Profile"
-
-    def get_picture(self):
-        try:
-            return self.picture.url
-        except:
-            no_picture = settings.MEDIA_URL + 'default.png'
-            return no_picture
-
-    def get_absolute_url(self):
-        return reverse('profile_single', kwargs={'id': self.id})
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        try:
-            img = Image.open(self.picture.path)
-            if img.height > 300 or img.width > 300:
-                output_size = (300, 300)
-                img.thumbnail(output_size)
-                img.save(self.picture.path)
-        except:
-            pass
-
-    def delete(self, *args, **kwargs):
-        if self.picture.url != settings.MEDIA_URL + 'default.png':
-            self.picture.delete()
-        super().delete(*args, **kwargs)
-
-    class Meta:
-            verbose_name = 'پروفایل'
-            verbose_name_plural = 'پروفایل ها'
 
 
 class Student(models.Model):

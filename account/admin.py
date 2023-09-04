@@ -5,7 +5,6 @@ from . import models
 
 admin.site.register(models.OtpCode)
 admin.site.register(models.ValidateProfile)
-admin.site.register(models.Profile)
 admin.site.register(models.Student)
 
 # admin.site.unregister(Group)

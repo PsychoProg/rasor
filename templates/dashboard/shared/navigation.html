@@ -6,26 +6,9 @@
                 <div class="nav toggle">
                   <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                 </div>
-  
+
                 <ul class="nav navbar-nav navbar-right">
-                  <li class="">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <span class=" fa fa-angle-down"></span>{{ request.user.first_name }} {{ request.user.last_name }}
-                      <img src="{{ request.user.profiles.image.url }}" alt="">
-                    </a>
-                    <ul class="dropdown-menu dropdown-usermenu pull-right text-right">
-                      <li><a href="javascript:;"> پروفایل</a></li>
-                      <li>
-                        <a href="javascript:;">
-                          {% comment %} <span class="badge bg-red pull-left">50%</span> {% endcomment %}
-                          <span>تنظیمات</span>
-                        </a>
-                      </li>
-                      <li><a href="javascript:;">راهنما</a></li>
-                      <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out pull-left"></i> خروج</a></li>
-                    </ul>
-                  </li>
-  
+                  {% comment %}  {% endcomment %}
                   <li role="presentation" class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                       <i class="fa fa-envelope-o"></i>
@@ -90,6 +73,26 @@
                       </li>
                     </ul>
                   </li>
+                  {% comment %}  {% endcomment %}
+                  <li class="">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <span class=" fa fa-angle-down"></span>{{ request.user.first_name }} {{ request.user.last_name }}
+                      <img src="{{ request.user.picture.url }}" alt="">
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu pull-right text-right">
+                      <li><a href="javascript:;"> پروفایل</a></li>
+                      <li>
+                        <a href="javascript:;">
+                          {% comment %} <span class="badge bg-red pull-left">50%</span> {% endcomment %}
+                          <span>تنظیمات</span>
+                        </a>
+                      </li>
+                      <li><a href="javascript:;">راهنما</a></li>
+                      <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out pull-left"></i> خروج</a></li>
+                    </ul>
+                  </li>
+  
+                  
                 </ul>
               </nav>
             </div>

@@ -37,54 +37,46 @@
             <div class="x_content">
                 <br>
                 
-                <form class="form-horizontal form-label-right input_mask" method="post">
+                <form class="form-horizontal form-label-right input_mask" enctype="multipart/form-data" method="post">
                     {% csrf_token %}
                     
                 
                 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        {{ user_form.first_name }}
+                        {{ form.first_name }}
                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                     </div> 
                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        {{ user_form.username}}
-                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        {{ form.username}}
+                        <span class="fa fa-users form-control-feedback right" aria-hidden="true"></span>
                     </div> 
                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        {{ user_form.last_name }}
+                        {{ form.last_name }}
                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                     </div> 
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        {{ profile_form.phone }}
+                        {{ form.phone }}
                         <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        {{ user_form.email }}
+                        {{ form.email }}
                         <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
                     </div> 
                     
-                    {% comment %} <div class="form-group text-right">
-                        <div class="col-md-3 col-sm-3 col-xs-6">
-                        <div class="select2-single">
-                            {{ profile_form.degree }}    
-                        </div>
-                        </div>
-                        <label class="control-label col-md-3 col-sm-2 col-xs-4 text-right">:مدرک تحصیلی</label>
-                    </div>
                     <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            {{ profile_form.address}}
+                            {{ form.address}}
                         </div>
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">آدرس</label>
+                        
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">عکس کاربر</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">عکس پروفایل</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            {{ profile_form.image }}
-                        <span class="danger">{{ profile_form.image.errors }}</span>
+                            {{ form.picture }}
+                        <span class="danger">{{ form.picture.errors }}</span>
                         </div>
                     </div>
-                     {% endcomment %}
+                    
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">

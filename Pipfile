@@ -12,6 +12,7 @@ markdown = "*"
 django-widget-tweaks = "*"
 django-ckeditor = "*"
 django-bootstrap-v5 = "*"
+django-cleanup = "*"
 
 [dev-packages]
 
