@@ -97,10 +97,10 @@
                 <div class="card cart-block">
                     <div class="card-img"><img src="{{ product.image.url }}" class="card-img-top"></div>
                     <div class="card-block">
-                        <a href="{{product.get_absolute_url}}"><h4 class="card-title">{{ product.title }} </h4></a>
+                        <h4 class="card-title">{{ product.title }} </h4>
                         <h5 class="card-subtitle">{{ product.author }}</h5>
                         <p class="card-text">{{ product.content|markdown|truncatewords_html:30}}</p>
-                        <div class="card-btn"><a href="#" class="btn btn-primary">بیشتر</a></div>
+                        <div class="card-btn"><a href="{{product.get_absolute_url}}" class="btn btn-primary">بیشتر</a></div>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
 {% endif %}
 {% empty %}
     <div class='container'>
-        <h1> no news</h1>
+        <h1> محصولی ثبت نشده</h1>
     </div>
 {% endfor %}
 {% comment %} end products {% endcomment %}
@@ -146,7 +146,7 @@
                     <h4 class="card-title">{{ item.title }}</h4>
                     
                     <p class="card-text">{{ item.content|markdown|truncatewords_html:60 }}</p>
-                    <div class="card-btn"><a href="https://mobirise.com" class="btn btn-primary">بیشتر</a> </div>
+                    <div class="card-btn"><a href="{{item.get_absolute_url}}" class="btn btn-primary">بیشتر</a> </div>
                     </div>
                 </div>
             </div>
@@ -159,7 +159,7 @@
 
 {% empty %}
 <div class='container'>
-    <h1> no news</h1>
+    <h1> خبری ثبت نشده</h1>
 </div>
 {% endfor %}
 <hr>

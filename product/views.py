@@ -28,7 +28,7 @@ def product_detail(request, pk, slug):
 
     context = {
         'title': product.title,
-        'product': product,
-        'similar_posts': similar_products,
+        'items': product,
+        'similar_items': similar_products,
     }
     return render(request, 'home/detail.html', context)

@@ -1,8 +1,11 @@
 from django.db import models
 # from django.contrib.auth.models import User
-from django.db.models.query import QuerySet 
+from django.db.models.query import QuerySet
+from django.urls import reverse 
 from django.utils.translation import gettext_lazy as _ 
 from django.contrib.auth import get_user_model
+from django.utils.text import slugify
+from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from PIL import Image
 
@@ -39,9 +42,10 @@ class ListBox(models.Model):
 
 class News(models.Model):
     title = models.CharField(max_length=255)
-    author = models.ForeignKey(USER, on_delete=models.PROTECT, related_name='news')
+    slug = models.SlugField()
     content = RichTextField()
     image = models.ImageField(upload_to='home/news/%Y/%m')
+    tags = TaggableManager()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -55,6 +59,10 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('home:news_detail', kwargs={'pk': self.id, 'slug': self.slug})
+    
 
     class Meta:
         ordering = ['-created_at']

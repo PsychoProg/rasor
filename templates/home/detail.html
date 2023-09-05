@@ -7,15 +7,15 @@
 {% block content %}
 <section class="engine"><a rel="external" href="https://mobirise.com">Site Builder</a></section><section class="mbr-slider mbr-section mbr-section__container carousel slide mbr-section-nopadding mbr-after-navbar" data-ride="carousel" data-keyboard="false" data-wrap="true" data-pause="false" data-interval="10000" id="slider-h">
     
-    <div class="mbr-section mbr-section-hero dark center mbr-section-full active" data-bg-video-slide="false" style="background-image: url({{ product.image.url }});">
+    <div class="mbr-section mbr-section-hero dark center mbr-section-full active" data-bg-video-slide="false" style="background-image: url({{ items.image.url }});">
         <div class="mbr-table-cell">
         <div class="mbr-overlay"></div>
     <div class="container">
 
     <div class="row">
         <div class="col-md-8 col-md-offset-3 text-xs-right">
-        <h2 class="mbr-section-title display-1">{{ product.title }}</h2>
-    <p class="mbr-section-lead lead">{{ product.content|truncatewords_html:20 }}</p>
+        <h2 class="mbr-section-title display-1">{{ items.title }}</h2>
+    <p class="mbr-section-lead lead">{{ items.content|truncatewords_html:20 }}</p>
     
 </div>
 
@@ -30,8 +30,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                {% if product %}
-                <h3 class="font-iransans mbr-section-title display-2">{{ product.title }}</h3>
+                {% if items %}
+                <h3 class="font-iransans mbr-section-title display-2">{{ items.title }}</h3>
                 <br>
                 {% comment %} <small class="mbr-section-subtitle">نویسنده: {{ page_content_1.author.first_name}} {{ page_content_1.author.last_name}}</small> {% endcomment %}
                 {% endif %}
@@ -44,8 +44,8 @@
 
     <div class="container">
         <div class="row">
-            {% if product %}
-            <div class="col-xs-12 lead"><p>{{ product.content|markdown }}</strong></p><p></p><div style="text-align: right;"></div><p></p></div>
+            {% if items %}
+            <div class="col-xs-12 lead"><p>{{ items.content|markdown }}</strong></p><p></p><div style="text-align: right;"></div><p></p></div>
             {% endif %}
         </div>
     </div>
@@ -54,15 +54,15 @@
 
 <hr>
 
-<section class="mbr-section mbr-parallax-background" id="content5-n" style="background-image: url({{ product.image.url }}); padding-top: 120px; padding-bottom: 160px;">
+<section class="mbr-section mbr-parallax-background" id="content5-n" style="background-image: url({{ items.image.url }}); padding-top: 120px; padding-bottom: 160px;">
 
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 0, 0);">
     </div>
 
     <div class="container">
-        {% if product %}
-        <h3 class="mbr-section-title display-2">{{ product.title }}</h3>
-        <div class="lead"><p><span style="font-size: 1.07rem; line-height: 1.5;">{{ product.content|markdown|truncatewords_html:30 }}</p></div>
+        {% if items %}
+        <h3 class="mbr-section-title display-2">{{ items.title }}</h3>
+        <div class="lead"><p><span style="font-size: 1.07rem; line-height: 1.5;">{{ items.content|markdown|truncatewords_html:30 }}</p></div>
         {% endif %}
     </div>
 
