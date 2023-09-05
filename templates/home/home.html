@@ -3,7 +3,7 @@
 {% load custom_tags %}
 
 {% block title %}
-Home
+{{title}}
 {% endblock %}
 
 
@@ -97,7 +97,7 @@ Home
                 <div class="card cart-block">
                     <div class="card-img"><img src="{{ product.image.url }}" class="card-img-top"></div>
                     <div class="card-block">
-                        <h4 class="card-title">{{ product.title }}</h4>
+                        <a href="{{product.get_absolute_url}}"><h4 class="card-title">{{ product.title }} </h4></a>
                         <h5 class="card-subtitle">{{ product.author }}</h5>
                         <p class="card-text">{{ product.content|markdown|truncatewords_html:30}}</p>
                         <div class="card-btn"><a href="#" class="btn btn-primary">بیشتر</a></div>

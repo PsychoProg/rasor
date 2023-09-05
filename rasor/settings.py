@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'dashboard.apps.DashboardConfig',
     'home.apps.HomeConfig',
+    'product.apps.ProductConfig',
     'core.apps.CoreConfig',
 ]
 

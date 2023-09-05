@@ -11,6 +11,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('account/', include('account.urls')),
+    path('products/', include('product.urls'))
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
