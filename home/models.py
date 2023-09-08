@@ -121,10 +121,18 @@ class CompanyInfo(models.Model):
         verbose_name_plural = 'اطلاعات شرکت'
 
 class ShareLinks(models.Model):
-    instagram = models.CharField(max_length=255)
-    telegram = models.CharField(max_length=255)
-    gmail = models.CharField(max_length=255)
-    youtube = models.CharField(max_length=255)
+    class TitleChoice(models.TextChoices):
+        TELEGRAM = 'TELEGRAM' 
+        INSTAGRAM = 'INSTAGRAM' 
+        TWITTER = 'TWITTER' 
+        GOOGLE = 'GOOGLE' 
+        PINTEREST = 'PINTEREST' 
+        LINKEDIN = 'LINKEDIN' 
+        YOUTUBE = 'YOUTUBE' 
+        FACEBOOK = 'FACEBOOK' 
+
+    title = models.CharField(choices=TitleChoice.choices, default=TitleChoice.TELEGRAM)
+    link = models.CharField(max_length=255)
 
     class Meta:
         verbose_name = 'لینک'

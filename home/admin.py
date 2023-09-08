@@ -30,5 +30,14 @@ class PageContent1Admin(admin.ModelAdmin):
 class PageContent2Admin(admin.ModelAdmin):
     list_display = ['title']
     
+
+@admin.register(models.ShareLinks)
+class ShareLinksAdmin(admin.ModelAdmin):
+    list_display = ['title', 'link']
+    search_fields = ['title']
+    
+
+
 admin.site.register(models.CompanyInfo)
-admin.site.register(models.ShareLinks)
+
+

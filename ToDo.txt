@@ -1,7 +1,12 @@
+• Access to articles after register or pay
+• Home page share links
+• detail view part 1 display content >> must fix
 • about us page 
-• display only last 4 products and news on homepage
 • products page
 • news and blog page
 • complete dashboard sidebar options and set icons
 • Create a Tag model in Core app 
 • USER LIMIT: send multiple comments
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Done • display only last 4 products and news on homepage 
