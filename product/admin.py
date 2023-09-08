@@ -9,4 +9,5 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['id', 'title']
     prepopulated_fields = {'slug': ['title']}
     date_hierarchy = 'published_at'
-    ordering = ['published_at', 'status']
+    ordering = ['id']
+    # autocomplete_fields = ['tags']

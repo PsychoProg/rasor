@@ -1,6 +1,8 @@
 from django import forms 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm
+from django.forms import widgets
+from .models import Comments
 
 USER = get_user_model()
 
@@ -32,5 +34,18 @@ class ProfileUpdateForm(UserChangeForm):
         widget=forms.TextInput(attrs={'type': 'text', 'class': 'form-control text-right', 
         'placeholder':"آدرس" }))
 
-    # picture = forms.ImageField()
 
+class CommentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+
+        self.fields['subject'].widget = widgets.TextInput(
+            attrs={'placeholder': 'موضوع', 'class': 'form-control text-right'}
+        )
+        self.fields['message'].widget = widgets.Textarea(
+            attrs={'placeholder': 'پیام خود را بنویسید', 'class': 'form-control text-right'}
+        )
+
+    class Meta:
+        model = Comments
+        fields = ['subject', 'message']

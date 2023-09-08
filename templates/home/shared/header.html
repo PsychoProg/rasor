@@ -19,16 +19,18 @@
                         <div class="hamburger-icon"></div>
                     </button>
 
-                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar">
+                    <ul class="text-right nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar">
                         <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">یک معلم شوید</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li>
+                        <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">وبلاگ</a><div class="dropdown-menu"><a class="dropdown-item" href="#">محصولات</a><a class="dropdown-item" href="#">اخبار</a></div></li>
                         <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">آکادمیک</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li>
                         <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">مشاغل</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li>
                         <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="https://mobirise.com/" aria-expanded="false" data-toggle="dropdown-submenu">تجارب</a><div class="dropdown-menu"><a class="dropdown-item" href="#">New Item</a></div></li>
-                        {% if request.user.is_authenticated%}
-                          <li class="nav-item nav-btn"><a class="nav-link btn btn-secondary-outline btn-secondary" href="{% url 'logout' %}">خروج</a></li></ul>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="{% url 'dashboard:dashboard' %}" aria-expanded="false" data-toggle="dropdown-submenu">حساب کاربری</a><div class="dropdown-menu"><a class="dropdown-item" href="{% url 'dashboard:dashboard' %}">داشبورد</a><a class="dropdown-item" href="{% url 'logout' %}">خروج</a></div></li>
                         {% else %}
-                            <li class="nav-item nav-btn"><a class="nav-link btn btn-secondary-outline btn-secondary" href="{% url 'login' %}">ورود</a></li></ul>
+                        <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" href="{% url 'dashboard:dashboard' %}" aria-expanded="false" data-toggle="dropdown-submenu">حساب کاربری</a><div class="dropdown-menu"><a class="dropdown-item" href="{% url 'login' %}">ورود</a><a class="dropdown-item" href="{% url 'register' %}">ثبت نام</a></div></li>
                         {% endif %}
+                        
                     <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
                         <div class="close-icon"></div>
                     </button>

@@ -87,6 +87,7 @@
 
 <hr>
 <br>
+
 {% comment %} products {% endcomment %}
 {% for product in products %}
 {% if forloop.counter0|divisibleby:3 %}
@@ -97,7 +98,7 @@
                 <div class="card cart-block">
                     <div class="card-img"><img src="{{ product.image.url }}" class="card-img-top"></div>
                     <div class="card-block">
-                        <h4 class="card-title">{{ product.title }} </h4>
+                        <h4 class="card-title">{{ product.title|markdown }}</h4>
                         <h5 class="card-subtitle">{{ product.author }}</h5>
                         <p class="card-text">{{ product.content|markdown|truncatewords_html:30}}</p>
                         <div class="card-btn"><a href="{{product.get_absolute_url}}" class="btn btn-primary">بیشتر</a></div>
@@ -117,6 +118,7 @@
 {% endfor %}
 {% comment %} end products {% endcomment %}
 
+
 <section class="mbr-section mbr-parallax-background" id="content5-n" style="background-image: url({% static 'home/images/mbr-1-2000x1334.jpg' %}); padding-top: 120px; padding-bottom: 160px;">
 
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 0, 0);">
@@ -124,7 +126,7 @@
 
     <div class="container">
         {% if page_content_2 %}
-        <h3 class="mbr-section-title display-2">{{ page_content_2.title }}</h3>
+        <h3 class="mbr-section-title display-2">{{ page_content_2.title|markdown }}</h3>
         <div class="lead"><p><span style="font-size: 1.07rem; line-height: 1.5;">{{ page_content_2.content|markdown }}</p></div>
         {% endif %}
     </div>
@@ -143,7 +145,7 @@
               <div class="card cart-block">
                   <div class="card-img"><img src="{{ item.image.url }}" class="card-img-top"></div>
                   <div class="card-block">
-                    <h4 class="card-title">{{ item.title }}</h4>
+                    <h4 class="card-title">{{ item.title|markdown }}</h4>
                     
                     <p class="card-text">{{ item.content|markdown|truncatewords_html:60 }}</p>
                     <div class="card-btn"><a href="{{item.get_absolute_url}}" class="btn btn-primary">بیشتر</a> </div>
@@ -165,21 +167,24 @@
 <hr>
 <br>
 
+
 <section class="mbr-section mbr-section-md-padding mbr-footer footer2 mbr-parallax-background" id="contacts2-p" style="background-image: url({% static 'home/images/mbr-2000x1071.jpg' %}); padding-top: 90px; padding-bottom: 90px;">
     <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(60, 60, 60);"></div>
     <div class="container">
         <div class="row">
             <div class="mbr-footer-content col-xs-12 col-md-3">
-                <p></p><p><font color="#7c7c7c" face="Montserrat, sans-serif" size="3"><span style="letter-spacing: -1px; line-height: 20px;"><strong>آدرس</strong></span></font><br>شاهرود، سمنان، ایران<br><br><br><font color="#7c7c7c" face="Montserrat, sans-serif" size="3"><span style="letter-spacing: -1px; line-height: 20px;"><strong>تماس</strong></span></font><br>
-Email: host@polelm.com<br><br></p><p></p>
             </div>
-            <div class="mbr-footer-content col-xs-12 col-md-3"><p class="mbr-contacts__text"><strong>آدرس</strong></p><ul><li>کلاس ها</li><li>داشبورد دانشجویان</li><li>داشبورد اساتید</li></ul></div>
+
+             <div class="mbr-footer-content col-xs-12 col-md-3"><p class="mbr-contacts__text"><strong>آدرس</strong></p><ul><li>کلاس ها</li><li>داشبورد دانشجویان</li><li>داشبورد اساتید</li></ul></div>
             <div class="col-xs-12 col-md-6">
                 <div class="mbr-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0Dx_boXQiwvdz8sJHoYeZNVTdoWONYkU&amp;q=place_id:ChIJ2dzzH0kAjj8RvCRwVnxps_A" allowfullscreen=""></iframe></div>
             </div>
-        </div>
+        </div> 
     </div>
 </section>
+
+
+
 
 <section class="mbr-section mbr-section-md-padding" id="social-buttons1-q" style="background-color: rgb(255, 255, 255); padding-top: 90px; padding-bottom: 90px;">
 
@@ -220,5 +225,7 @@ Email: host@polelm.com<br><br></p><p></p>
         </div>
     </div>
 </section>
+
+
 
 {% endblock %}

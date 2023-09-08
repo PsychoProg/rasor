@@ -552,13 +552,13 @@ h6,
 }
 #menu-k .link[aria-expanded="true"],
 #menu-k .dropdown-menu {
-  background: #0e0e0e;
+  background: #282828;
 }
 #menu-k .nav-dropdown-sm .link:focus,
 #menu-k .nav-dropdown-sm .link:hover,
 #menu-k .nav-dropdown-sm .dropdown-item:focus,
 #menu-k .nav-dropdown-sm .dropdown-item:hover {
-  background: #202020!important;
+  background: #202020 !important;
 }
 #menu-k .navbar,
 #menu-k .nav-dropdown-sm,

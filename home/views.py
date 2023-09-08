@@ -1,14 +1,12 @@
 from django.shortcuts import get_object_or_404, render
-from django.db.models import Count
-from core.decorators import mentor_required
 from product.models import Product
-from .models import ListBox, News, PageContent1, PageContent2, ShareLinks
+from .models import ListBox, News, PageContent1, PageContent2
 
 
 def home_view(request):
     list_items = ListBox.published.all()
-    products = Product.published.all()
-    news = News.published.all()
+    products = Product.published.all()[:3]
+    news = News.published.all()[:4]
     page_content_1 = PageContent1.objects.last()
     page_content_2 = PageContent2.objects.last()
     context = {
@@ -18,6 +16,7 @@ def home_view(request):
         'news': news,
         'page_content_1': page_content_1,
         'page_content_2': page_content_2,
+        'contact_alert': False
     }
     return render(request, 'home/home.html', context)
 
@@ -32,3 +31,5 @@ def news_detail(request, pk, slug):
         'items': news,
     }
     return render(request, 'home/detail.html', context)
+
+

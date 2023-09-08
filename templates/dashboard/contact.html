@@ -1,0 +1,21 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    
+    {{form.subject}}
+    <br>
+    {{form.message}}
+    <br>
+
+<button class="btn btn-default submit" type="submit" href="{% url 'home:home' %}">ارسال</button>
+</form>
+
+
+{% endblock %}

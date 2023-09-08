@@ -24,11 +24,11 @@ class Product(models.Model):
     tags = TaggableManager()
     image = models.ImageField(upload_to='product/%Y/%m/%d')
     content = RichTextField()
-    # thumbnail = models.ImageField(upload_to='product/%Y/%m/%d')
     published_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    # discuss about prodcut price 
+    price= models.DecimalField(max_digits=10, decimal_places=2)
+    
 
     class Status(models.TextChoices):
         DRAFT = 'DF', _('Draft')
@@ -52,7 +52,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         # create seo friendly url by slugify
-        self.slug = slugify(self.title)
+        # self.slug = slugify(self.title)
         # save the profile first
         super().save(*args, **kwargs)
         # resize the thumbnail

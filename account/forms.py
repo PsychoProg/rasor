@@ -34,10 +34,6 @@ class RegisterForm(UserCreationForm):
 
         self.fields['username'].widget = widgets.TextInput(
             attrs={'placeholder': "نام کاربری", "class": "form-control text-right"})
-        # self.fields['first_name'].widget = widgets.TextInput(
-        #     attrs={'placeholder': "نام", "class": "form-control text-right"})
-        # self.fields['last_name'].widget = widgets.TextInput(
-        #     attrs={'placeholder': "نام خانوادگی", "class": "form-control text-right"})
         self.fields['email'].widget = widgets.EmailInput(
             attrs={'placeholder': "ایمیل", "class": "form-control text-right"})
         self.fields['password1'].widget = widgets.PasswordInput(

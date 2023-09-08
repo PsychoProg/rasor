@@ -92,13 +92,22 @@ add this to html form
 <form class="" enctype="multipart/form-data" method="post">
 
 
-==========================================================
-==========================================================
+========================================================== DB error 
+ERROR:  character with byte sequence 0xd8 0xb9 in encoding "UTF8" has no equivalent in encoding "WIN1252"
+> set client_encoding to 'WIN1252';
+or 
+> set client_encoding to 'utf8';
 
+========================================================== Redirect with context
+In django You can not pass parameters with redirect. Your only bet is to pass them as a part of URL.
+"""
+def foo(request):
 
+    context['bar'] = 'FooBar'
 
-
-
+    redirect(reverse('app:view', kwargs={ 'bar': FooBar }))
+"""
+in your html you can get them from URL.
 
 ==========================================================
 ==========================================================
