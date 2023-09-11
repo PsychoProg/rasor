@@ -1,12 +1,14 @@
-• Access to articles after register or pay
-• Home page share links
-• detail view part 1 display content >> must fix
+• add product cart ( user buy a product as time >> user allow to create coreses )
 • about us page 
-• products page
-• news and blog page
+• Add comment view for news and products
+• Access to articles after register or pay or set dashboard for not registred users
+• detail view part 1 display content >> must fix
 • complete dashboard sidebar options and set icons
 • Create a Tag model in Core app 
 • USER LIMIT: send multiple comments
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Done • display only last 4 products and news on homepage 
+Done • Home page share links
+Done • news and blog page
+Done • products page

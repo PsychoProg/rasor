@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'product.context_processor.cart_total_amount',     # cart
             ],
         },
     },
@@ -175,12 +176,12 @@ AUTHENTICATION_BACKENDS = [
 
 AUTH_USER_MODEL = "core.User"
 
+CART_SESSION_ID = 'cart'
 
 # ckeditor
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'
-
 
 CKEDITOR_CONFIGS = {
     'default': {

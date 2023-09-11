@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b8b9417c4a280a54ae73002d170a24f7a4937038d85494e36bedea17e6105964"
+            "sha256": "7a5a6836d1b8e8c1e4a9ce0cdc590acd418ecf21e9d46038a67cee3e2ac46347"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -86,6 +86,14 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==2.1.0"
+        },
+        "django-shopping-cart": {
+            "hashes": [
+                "sha256:01fb2ebf63e4e0ee34f9ed4ac9ee2cad65bbcdbd1519ad0165820d01dc59da83",
+                "sha256:fd125c07968354c7967782e735b888d61b3e76139ab9babfcd3eae25b559d38c"
+            ],
+            "index": "pypi",
+            "version": "==0.1"
         },
         "django-taggit": {
             "hashes": [

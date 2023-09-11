@@ -8,6 +8,11 @@
 {% block content %}
 <div class="container text-right">
 <h1>شما از حساب کاربری خود خارج شدید</h1>
-<a href="{% url 'login' %}">دوباره وارد شود</a>
+<hr>
+<br>
+
+<a href="{% url 'login' %}"><h4>دوباره وارد شود<h4></a>
+<br>
+<a href="{% url 'home:home' %}"><h4>بازگشت به صفحه اصلی</h4></a>
 </div>
 {% endblock %}

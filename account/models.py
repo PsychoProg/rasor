@@ -1,14 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, UserManager
-from django.conf import settings
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
-from django.db.models import Q
+from django.core.validators import MinValueValidator
+from decimal import Decimal
+from product.models import Course 
 from PIL import Image
-from django.contrib.auth.models import User
-USER = get_user_model()
 
+USER = get_user_model()
 
 class OtpCode(models.Model):
     user = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='otp_codes')

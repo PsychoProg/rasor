@@ -40,27 +40,26 @@
               <li><a href="{% url 'password_reset' %}">تغییر رمز عبور</a></li>
             </ul>
           </li>
-          <li><a><i class="fa fa-desktop"></i> درس ها و دوره ها <span class="fa fa-chevron-down"></span></a>
+          <li><a><i class="fa fa-mortar-board"></i> درس ها و دوره ها <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="general_elements.html">دوره های خریداری شده</a></li>
             </ul>
           </li>
-          <li><a><i class="fa fa-table"></i> محصولات <span class="fa fa-chevron-down"></span></a>
+          <li><a><i class="fa fa-archive"></i> محصولات <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="#"> لیست محصولات </a></li>
-              <li><a href="#"> محصولات خریداری شده </a></li>
             </ul>
           </li>
-          <li><a><i class="fa fa-bar-chart-o"></i> وبلاگ <span class="fa fa-chevron-down"></span></a>
+          <li><a><i class="fa fa-desktop"></i> وبلاگ <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="#"> مقالات </a></li>
               <li><a href="#"> اخبار </a></li>
             </ul>
           </li>
-          <li><a><i class="fa fa-clone"></i> Layouts <span class="fa fa-chevron-down"></span></a>
+          <li><a><i class="fa fa-inbox"></i> سبد خرید <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-              <li><a href="fixed_footer.html">Fixed Footer</a></li>
+              <li><a href="{% url 'product:cart_detail' %}">مشاهده سبد خرید</a></li>
+              {% comment %} <li><a href="{% %}">جزییات محصولات</a></li> {% endcomment %}
             </ul>
           </li>
         </ul>
@@ -68,7 +67,7 @@
       <div class="menu_section">
         {% comment %} <h3></h3> {% endcomment %}
         <ul class="nav side-menu">
-          <li><a><i class="fa fa-bug"></i> درباره ما <span class="fa fa-chevron-down"></span></a>
+          <li><a><i class="fa fa-users"></i> درباره ما <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="#"> درباره ما </a></li>
               <li><a href="{% url 'dashboard:contact-us' %}"> تماس با ما </a></li>

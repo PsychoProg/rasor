@@ -16,7 +16,11 @@
         <div class="row">
             <div class="col-xs-12">
                 {% if items %}
+                {% if items.name %}
+                <h3 class="font-iransans mbr-section-title display-2">{{ items.name }}</h3>
+                {% else %}
                 <h3 class="font-iransans mbr-section-title display-2">{{ items.title }}</h3>
+                {% endif %}
                 <br>
                 {% comment %} <small class="mbr-section-subtitle">نویسنده: {{ page_content_1.author.first_name}} {{ page_content_1.author.last_name}}</small> {% endcomment %}
                 {% endif %}
@@ -32,6 +36,8 @@
             {% if items %}
             <div class="col-xs-12 lead"><p>{{ items.content|markdown }}</strong></p><p></p><div style="text-align: right;"></div><p></p></div>
             {% endif %}
+            
+
         </div>
     </div>
 
@@ -39,20 +45,35 @@
 
 <hr>
 
+
+{% if product_true %}
 <section class="mbr-section mbr-parallax-background" id="content5-n" style="background-image: url({{ items.image.url }}); padding-top: 120px; padding-bottom: 160px;">
 
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 0, 0);">
     </div>
 
     <div class="container">
-        {% if items %}
-        <h3 class="mbr-section-title display-2">{{ items.title }}</h3>
-        <div class="lead"><p><span style="font-size: 1.07rem; line-height: 1.5;">{{ items.content|markdown|truncatewords_html:30 }}</p></div>
+        {% if items  %}
+
+        {% if items.name %}
+            <h4 class="card-title">{{items.name|markdown}}</h4>
+        {% else %}
+            <h4 class="card-title">{{items.title|markdown}}</h4>
+        {% endif %}
+        {% if request.user.is_authenticated%}
+            <div class="card-btn"><a class="btn btn-primary" href="{% url 'product:cart_add' items.pk %}"><h3>افزودن به سبد خرید</h3></a></h3></div>
+            
+        {% else %}
+            <div class="card-btn"><a class="btn btn-primary" href="{% url 'login' %}"><h3>برای تهیه محصولات ثبت نام کنید</h3></a></div>
+
+            {% endif %}
         {% endif %}
     </div>
 
 </section>
+{% endif %}
 <hr>
 <br>
+
 
 {% endblock %}

@@ -109,6 +109,14 @@ def foo(request):
 """
 in your html you can get them from URL.
 
-==========================================================
+========================================================== Shoping cart 
+https://pypi.org/project/django-shopping-cart/#description
+github:
+https://github.com/MahmudulHassan5809/django-shopping-cart
+
+
+alibaba cloud:
+https://www.alibabacloud.com/blog/develop-a-cart-application-with-django_594697
+
 ==========================================================
 ==========================================================

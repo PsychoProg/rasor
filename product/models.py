@@ -5,8 +5,10 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _ 
 from django.utils.text import slugify
 from taggit.managers import TaggableManager
-from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
+from django.core.validators import MinValueValidator
+from decimal import Decimal
+from ckeditor.fields import RichTextField
 from PIL import Image
 
 USER = get_user_model()
@@ -18,17 +20,16 @@ class CustomManager(models.Manager):
     
 
 class Product(models.Model):
-    title = models.CharField(max_length=255)
-    # author = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='products')
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='product/%Y/%m/%d')
+    price= models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
     slug = models.SlugField()
     tags = TaggableManager()
-    image = models.ImageField(upload_to='product/%Y/%m/%d')
     content = RichTextField()
     published_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    price= models.DecimalField(max_digits=10, decimal_places=2)
-    
+    # discount
 
     class Status(models.TextChoices):
         DRAFT = 'DF', _('Draft')
@@ -40,7 +41,7 @@ class Product(models.Model):
     published = CustomManager()
 
     def __str__(self):
-        return self.title
+        return self.name
     
     class Meta:
         ordering=['-updated_at']
@@ -48,7 +49,7 @@ class Product(models.Model):
         verbose_name_plural = 'محصولات'
         
     def get_absolute_url(self):
-        return reverse('product:products_detail', kwargs={'pk': self.id, 'slug': self.slug })
+        return reverse('product:product_detail', kwargs={'pk': self.id, 'slug': self.slug })
 
     def save(self, *args, **kwargs):
         # create seo friendly url by slugify
@@ -63,3 +64,25 @@ class Product(models.Model):
         #     img.thumbnail(output_size)
         #     # overwrite the larger image
         #     img.save(self.image.path)    
+
+
+class Course(models.Model):
+    Mentor = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='courses')
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(upload_to='product/courses/%Y/')
+    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+
+
+class Enrollment(models.Model):
+    student = models.ForeignKey(USER, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    date_enrolled = models.DateTimeField(auto_now_add=True)
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(USER, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
+
+    def __str__(self):
+        return f"Cart for {self.user.username}"

@@ -11,6 +11,7 @@ from .models import Comments
 
 USER = get_user_model()
 
+# =================================== Dashboard Views =================================== 
 @login_required
 def dashboard(request):
     return render(request, 'dashboard/base.html')

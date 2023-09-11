@@ -44,7 +44,11 @@
               <div class="card cart-block">
                   <div class="card-img"><img src="{{ item.image.url}}" class="card-img-top"></div>
                   <div class="card-block">
-                    <h4 class="card-title">{{item.title|markdown}}</h4>
+                    {% if item.name %}
+                        <h4 class="card-title">{{item.name|markdown}}</h4>
+                    {% else %}
+                        <h4 class="card-title">{{item.title|markdown}}</h4>
+                    {% endif %}
                     {% comment %} <h5 class="card-subtitle"></h5> {% endcomment %}
                     <p class="card-text">{{ item.content|markdown|truncatewords_html:30 }}</p>
                     <div class="card-btn"><a href="{{ item.get_absolute_url }}" class="btn btn-primary">بیشتر</a></div>
@@ -58,6 +62,6 @@
 {%endfor%}
 </section>
 
-
+<hr>
 
 {% endblock %}

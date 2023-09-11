@@ -1,0 +1,55 @@
+{% load static %}
+
+<section class="mbr-section mbr-section-md-padding" id="social-buttons1-q" style="background-color: rgb(255, 255, 255); padding-top: 90px; padding-bottom: 90px;">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-xs-center">
+                <h3 class="mbr-section-title display-2">پل علم را به اشتراک بگذارید</h3>
+                <div>
+
+                  <div class="mbr-social-likes" data-counters="false">
+                    <span class="btn btn-social facebook" title="Share link on Facebook">
+                        <i class="socicon socicon-facebook"></i>
+                    </span>
+                    <span class="btn btn-social twitter" title="Share link on Twitter">
+                        <i class="socicon socicon-twitter"></i>
+                    </span>
+                    <span class="btn btn-social plusone" title="Share link on Google+">
+                        <i class="socicon socicon-googleplus"></i>
+                    </span>
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="mbr-section mbr-section-md-padding mbr-parallax-background" id="social-buttons2-r" style="background-image: url({% static 'home/images/mbr-1-2000x1334.jpg' %}); padding-top: 90px; padding-bottom: 90px;">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-xs-center">
+                <h3 class="mbr-section-title display-2">پل علم را دنبال کنید</h3>
+                <div>
+                   {%for item in links %}
+                    <a class="btn btn-social" title="{{item.title}}" target="_blank" href="{{item.link}}">
+                    {% if item.title == "TELEGRAM" %}<i class="socicon socicon-telegram text-primary"></i></a>
+                    {% elif item.title == "INSTAGRAM" %}<i class="socicon socicon-instagram text-primary"></i></a>
+                    {% elif item.title == "TWITTER" %}<i class="socicon socicon-twitter text-primary"></i></a>
+                    {% elif item.title == "GOOGLE" %}<i class="socicon socicon-googleplus text-primary"></i></a>
+                    {% elif item.title == "PINTEREST" %}<i class="socicon socicon-pinterest text-primary"></i></a>
+                    {% elif item.title == "LINKEDIN" %}<i class="socicon socicon-linkedin text-primary"></i></a>
+                    {% elif item.title == "YOUTUBE" %}<i class="socicon socicon-youtube text-primary"></i></a>
+                    {% elif item.title == "FACEBOOK" %}<i class="socicon socicon-facebook text-primary"></i></a>
+                    {% endif %}
+                    {% endfor %}
+                        
+            </div>
+        </div>
+    </div>
+</section>

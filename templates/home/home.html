@@ -95,7 +95,7 @@
               <div class="card cart-block">
                   <div class="card-img"><img src="{{ item.image.url}}" class="card-img-top"></div>
                   <div class="card-block">
-                    <h4 class="card-title">{{item.title|markdown}}</h4>
+                    <h4 class="card-title">{{item.name|markdown}}</h4>
                     {% comment %} <h5 class="card-subtitle"></h5> {% endcomment %}
                     <p class="card-text">{{ item.content|markdown|truncatewords_html:30 }}</p>
                     <div class="card-btn"><a href="{{ item.get_absolute_url }}" class="btn btn-primary">بیشتر</a></div>
@@ -107,8 +107,12 @@
 </div>
 {%endif%}
 {%endfor%}
+<div style="text-align:center;">
+<a href="{% url 'product:product_list' %}"><h3>مشاهده تمام محصولات</h3></a>
+</div>
 </section>
-
+<br>
+<hr>
 <section class="mbr-section mbr-parallax-background" id="content5-n" style="background-image: url({% static 'home/images/mbr-1-2000x1334.jpg' %}); padding-top: 120px; padding-bottom: 160px;">
 
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 0, 0);">
@@ -162,65 +166,13 @@ Email: host@polelm.com<br><br></p><p></p>
             <div class="mbr-footer-content col-xs-12 col-md-3"><p class="mbr-contacts__text"><strong>آدرس</strong></p><ul><li>کلاس ها</li><li>داشبورد دانشجویان</li><li>داشبورد اساتید</li></ul></div>
             <div class="col-xs-12 col-md-6">
                 <div class="mbr-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0Dx_boXQiwvdz8sJHoYeZNVTdoWONYkU&amp;q=place_id:ChIJ2dzzH0kAjj8RvCRwVnxps_A" allowfullscreen=""></iframe></div>
+                {% comment %} <div class="mbr-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6423.996091660042!2d54.92964749883742!3d36.385041341392686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1694244177109!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div> {% endcomment %}
             </div>
         </div>
     </div>
 </section>
 
-<section class="mbr-section mbr-section-md-padding" id="social-buttons1-q" style="background-color: rgb(255, 255, 255); padding-top: 90px; padding-bottom: 90px;">
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-xs-center">
-                <h3 class="mbr-section-title display-2">پل علم را به اشتراک بگذارید</h3>
-                <div>
-
-                  <div class="mbr-social-likes" data-counters="false">
-                    <span class="btn btn-social facebook" title="Share link on Facebook">
-                        <i class="socicon socicon-facebook"></i>
-                    </span>
-                    <span class="btn btn-social twitter" title="Share link on Twitter">
-                        <i class="socicon socicon-twitter"></i>
-                    </span>
-                    <span class="btn btn-social plusone" title="Share link on Google+">
-                        <i class="socicon socicon-googleplus"></i>
-                    </span>
-                    
-                    
-                  </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-<section class="mbr-section mbr-section-md-padding mbr-parallax-background" id="social-buttons2-r" style="background-image: url({% static 'home/images/mbr-1-2000x1334.jpg' %}); padding-top: 90px; padding-bottom: 90px;">
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-xs-center">
-                <h3 class="mbr-section-title display-2">پل علم را دنبال کنید</h3>
-                <div>
-                   {%for item in links %}
-                    <a class="btn btn-social" title="{{item.title}}" target="_blank" href="{{item.link}}">
-                    {% if item.title == "TELEGRAM" %}<i class="socicon socicon-telegram text-primary"></i></a>
-                    {% elif item.title == "INSTAGRAM" %}<i class="socicon socicon-instagram text-primary"></i></a>
-                    {% elif item.title == "TWITTER" %}<i class="socicon socicon-twitter text-primary"></i></a>
-                    {% elif item.title == "GOOGLE" %}<i class="socicon socicon-googleplus text-primary"></i></a>
-                    {% elif item.title == "PINTEREST" %}<i class="socicon socicon-pinterest text-primary"></i></a>
-                    {% elif item.title == "LINKEDIN" %}<i class="socicon socicon-linkedin text-primary"></i></a>
-                    {% elif item.title == "YOUTUBE" %}<i class="socicon socicon-youtube text-primary"></i></a>
-                    {% elif item.title == "FACEBOOK" %}<i class="socicon socicon-facebook text-primary"></i></a>
-                    {%endif%}
-                    {% endfor %}
-                        
-            </div>
-        </div>
-    </div>
-</section>
 
 {% endblock %}
