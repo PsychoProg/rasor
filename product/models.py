@@ -22,14 +22,17 @@ class CustomManager(models.Manager):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to='product/%Y/%m/%d')
-    price= models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    # price= models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    price = models.IntegerField()
     slug = models.SlugField()
     tags = TaggableManager()
     content = RichTextField()
     published_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # category
     # discount
+    # expire_date
 
     class Status(models.TextChoices):
         DRAFT = 'DF', _('Draft')
@@ -71,7 +74,8 @@ class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to='product/courses/%Y/')
-    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    # price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    price = models.IntegerField()
 
 
 class Enrollment(models.Model):
@@ -80,9 +84,32 @@ class Enrollment(models.Model):
     date_enrolled = models.DateTimeField(auto_now_add=True)
 
 
-class Cart(models.Model):
-    user = models.ForeignKey(USER, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product)
+class Order(models.Model):
+    user = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='oreders')
+    price = models.IntegerField()
+    # address = models.CharField(max_length=300)
+    # email = models.EmailField(blank=True, null=True)
+    # phone = models.CharField(max_length=12)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_paid = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Cart for {self.user.username}"
+        return self.user.phone
+    
+    class Meta:
+        ordering = ['is_paid']
+        verbose_name = 'سفارش'
+        verbose_name_plural = 'سفارش ها'
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items')
+    price = models.IntegerField()
+
+    def __str__(self):
+        return self.order.user.phone
+
+    class Meta:
+        verbose_name = 'جزییات سفارش'
+        verbose_name_plural = 'جزییات سفارش'

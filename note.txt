@@ -118,5 +118,41 @@ https://github.com/MahmudulHassan5809/django-shopping-cart
 alibaba cloud:
 https://www.alibabacloud.com/blog/develop-a-cart-application-with-django_594697
 
+========================================================== Nginx and Gunicorn
+https://www.mongard.ir/articles/122/set-up-django-with-postgres-nginx-and-gunicorn/
+
+========================================================== Sidebar broke 
+It cause can be some classes are not loaded currectly
+
+
+========================================================== Django Models Diagram
+Django + UML
+https://simpleit.rocks/python/django/generate-uml-class-diagrams-from-django-models/
+
+========================================================== Form data does not save in database
+It can cause by not sending user ID.
+set user ID field required to False.
+
+class Form(forms.ModleForm):
+  user = forms.IntegerField(required=False)
+  class Meta:
+    model = #
+    fields = '__all__'
+
+  
+class AddressView(View):
+  def post(self, request):
+    form = Form(request.POST)
+    if form.is_valid():
+      address = form.save(commit=False)
+      address.user = request.user
+      address.save()
+
+    return render(request, 'form.html', {'form': form})
+
+  def get(self, request):
+    form = Form()
+    return render(request, 'form.html', {'form': form})
+
 ==========================================================
 ==========================================================

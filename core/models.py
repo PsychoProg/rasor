@@ -14,8 +14,7 @@ class User(AbstractUser):
     address = models.CharField(max_length=60, blank=True, null=True)
     picture = models.ImageField(upload_to='profile_pictures/%Y/%m/%d/', default='default.png', null=True)
     email = models.EmailField(blank=True, null=True)
-
-
+    bio = models.TextField(blank=True, null=True)
 
     @property
     def get_full_name(self):

@@ -14,8 +14,18 @@ USER = get_user_model()
 # =================================== Dashboard Views =================================== 
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard/base.html')
+    context = {
+        'title' : 'داشبورد'
+    }
+    return render(request, 'dashboard/base.html', context)
         
+# =================================== Profile Views =================================== 
+def profile(request):
+    context = {
+        'title' : 'پروفایل'
+    }
+    return render(request, 'dashboard/profile.html', context)
+
 
 @login_required
 def update_profile(request):
@@ -36,7 +46,7 @@ def update_profile(request):
     }
     return render(request, 'dashboard/update-profile.html', context)
 
-
+# =================================== Contact Us Views =================================== 
 def contact_view(request):
     form = CommentForm()
     context = {}
@@ -70,5 +80,16 @@ def contact_view(request):
                 
             # Comment.save(request, name=name, email=email, subject=subject, message=message)
     
-    context = {'form': form}
+    context = {
+        'form': form,
+        'title': 'تماس با ما',
+    }
     return render(request, 'dashboard/contact.html', context)
+
+# =================================== Create New Courses Views =================================== 
+## check if user is_mentor = True >> decorators
+def create_course(request):
+    context = {
+        'title' : 'ایجاد دوره'
+    }
+    return render(request, 'dashboard/create_course.html', context)

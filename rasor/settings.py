@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'account.apps.AccountConfig',
     'django_cleanup.apps.CleanupConfig',
-    'blog.apps.BlogConfig',
     'dashboard.apps.DashboardConfig',
     'home.apps.HomeConfig',
     'product.apps.ProductConfig',
@@ -247,3 +246,33 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+# log file
+# ADMINS = [('ali', 'mirzaeea450@gmail.com'),]
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': '/path/to/django/debug.log',
+#         },
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'class': 'django.utils.log.AdminEmailHandler',
+#         }
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file', 'mail_admins'],
+#             'propagate': True,
+#         },
+#     }
+# }

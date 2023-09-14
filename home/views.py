@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404, render
-from django.views import View
 from product.models import Product
-from .models import ListBox, News, PageContent1, PageContent2, ShareLinks
+from .models import ListBox, News, PageContent1, PageContent2, ShareLinks, AboutUs
 
 # =================================== Home View =================================== 
 def home_view(request):
@@ -45,4 +44,12 @@ def news_list(request):
     }
     return render(request, 'home/list.html', context)
 
-# ===================================  =================================== 
+# =================================== About Us =================================== 
+def about_view(request):
+    about = AboutUs.objects.last()
+    links = ShareLinks.objects.all()
+    context = {
+        'items': about,
+        'links': links,
+    }
+    return render(request, 'home/about_us.html', context)

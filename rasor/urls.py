@@ -8,7 +8,6 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include('home.urls')),
-    path('blog/', include('blog.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('account/', include('account.urls')),
     path('products/', include('product.urls'))

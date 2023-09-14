@@ -1,14 +1,17 @@
-• add product cart ( user buy a product as time >> user allow to create coreses )
-• about us page 
+• user skills auto complete field https://django-autocomplete-light.readthedocs.io/en/master/tutorial.html
+• add product cart ( user buy a product as time >> user allow to create coureses )
 • Add comment view for news and products
 • Access to articles after register or pay or set dashboard for not registred users
 • detail view part 1 display content >> must fix
 • complete dashboard sidebar options and set icons
 • Create a Tag model in Core app 
+• display user image in admin panel
 • USER LIMIT: send multiple comments
+• OAuth
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Done • display only last 4 products and news on homepage 
 Done • Home page share links
 Done • news and blog page
 Done • products page
+Done• about us page 

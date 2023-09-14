@@ -39,5 +39,5 @@ class ShareLinksAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.CompanyInfo)
-
+admin.site.register(models.AboutUs)
 

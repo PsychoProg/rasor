@@ -139,3 +139,14 @@ class ShareLinks(models.Model):
         verbose_name_plural = 'لینک ها'
 
 
+class AboutUs(models.Model):
+    title = models.CharField(max_length=255)
+    content = RichTextField()
+    image = models.ImageField(upload_to='home/about_us/')
+
+    def __str__(self):
+        return self.title 
+    
+    class Meta:
+        verbose_name = "درباره ما"
+        verbose_name_plural = "درباره ما"

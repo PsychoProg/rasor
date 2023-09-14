@@ -29,6 +29,8 @@
           <li><a><i class="fa fa-home"></i> صفحه اصلی <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="{% url 'dashboard:dashboard' %}"> داشبورد </a></li>
+              <li><a href="{% url 'dashboard:profile' %}"> پروفایل </a></li>
+              <li><a href="{% url 'home:home' %}"> صفحه اصلی </a></li>
               {% if request.user.is_staff %}
               <li><a href="{% url 'dashboard:dashboard' %}"> پنل ادمین </a></li>
               {% endif %}
@@ -36,13 +38,14 @@
           </li>
           <li><a><i class="fa fa-edit"></i> اطلاعت کاربر <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="{% url 'dashboard:update-profile' %}"> اطلاعات شخصی</a></li>
+              <li><a href="{% url 'dashboard:update_profile' %}">ویرایش اطلاعات</a></li>
               <li><a href="{% url 'password_reset' %}">تغییر رمز عبور</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-mortar-board"></i> درس ها و دوره ها <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="general_elements.html">دوره های خریداری شده</a></li>
+              <li><a href="#">دوره های من</a></li>
+              <li><a href="{% url 'dashboard:create_course' %}">ایجاد دوره جدید</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-archive"></i> محصولات <span class="fa fa-chevron-down"></span></a>
@@ -70,37 +73,12 @@
           <li><a><i class="fa fa-users"></i> درباره ما <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="#"> درباره ما </a></li>
-              <li><a href="{% url 'dashboard:contact-us' %}"> تماس با ما </a></li>
+              <li><a href="{% url 'dashboard:contact_us' %}"> تماس با ما </a></li>
             </ul>
           </li>
-          <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-              <li><a href="page_403.html">403 Error</a></li>
-              <li><a href="page_404.html">404 Error</a></li>
-              <li><a href="page_500.html">500 Error</a></li>
-              <li><a href="plain_page.html">Plain Page</a></li>
-              <li><a href="login.html">Login Page</a></li>
-              <li><a href="pricing_tables.html">Pricing Tables</a></li>
-            </ul>
-          </li>
-          <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="#level1_1">Level One</a>
-                <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li class="sub_menu"><a href="level2.html">Level Two</a>
-                    </li>
-                    <li><a href="#level2_1">Level Two</a>
-                    </li>
-                    <li><a href="#level2_2">Level Two</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="#level1_2">Level One</a>
-                </li>
-            </ul>
-          </li>
-          <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-left">Coming Soon</span></a></li>
+          
+          
+          
         </ul>
       </div>
 
@@ -109,16 +87,16 @@
 
     <!-- /menu footer buttons -->
     <div class="sidebar-footer hidden-small">
-      <a data-toggle="tooltip" data-placement="top" title="Settings">
+      <a data-toggle="tooltip" data-placement="top" title="تنظیمات">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
       </a>
-      <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+      <a data-toggle="tooltip" data-placement="top" title="پیام ها">
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
       </a>
-      <a data-toggle="tooltip" data-placement="top" title="Lock">
-        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+      <a data-toggle="tooltip" data-placement="top" title="بازگشت به صفحه اصلی">
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
       </a>
-      <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+      <a data-toggle="tooltip" data-placement="top" title="خروج" href="{% url 'logout' %}">
         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
       </a>
     </div>
