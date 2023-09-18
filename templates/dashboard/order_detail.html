@@ -6,6 +6,51 @@
 {% endblock%}
 
 {% block content %}
-    
+  <!-- start project list -->
+  <table class="table table-striped projects">
+    <thead>
+      <tr>
+          
+          <th style="width: 10%; text-align: right; ">وضعیت</th>
+          <th style="width: 10%; text-align: right; ">قیمت (تومان)</th>
+          <th style="width: 30%; text-align: right;">نام محصول</th>
+          <th style="width: 5%; text-align: right;">#</th>
+      </tr>
+    </thead>
+    <!-- course -->
+    <tbody>
+        {% for item in order.items.all %}
+      <tr>
+          
+          <td>
+            {% if item.order.is_paid%}
+              <h4 type="button" class="text text-success">پرداخت شده</h4>
+            {% else %}
+            <h4 type="button" class="text text-danger">در صف پرداخت</h4>
+            {% endif %}
+          </td>
+          {% comment %} <td><img src="{{item.image.url}}" style="width:200px"></td> {% endcomment %}
+          <td>
+                <p class="text text-secondary h4">{{item.product.price}} </p>
+              
+            </td>
+            <td>
+                <p class="text text-primary h4">{{item.product.name}}</p>
+            </td>
+        <td>
 
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+</table>
+<!-- end project list -->
+<br>
+
+<h1 class="text text-primary"><span>قیمت نهایی:‌ </span>{{order.price}}<span> تومان </span></h1>
+<form action="{% url 'product:request' order.id %}" method="post">
+    {% csrf_token %}
+<button type="submit" class="btn btn-success">پرداخت</button>
+</form>
 {% endblock%}

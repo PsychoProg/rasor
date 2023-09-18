@@ -6,8 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.urls import reverse
 from django.core.mail import send_mail
-from .forms import ProfileUpdateForm, CommentForm
-from .models import Comments
+from .forms import ProfileUpdateForm, CommentForm, CourseCreateForm, CourseContentForm
+from .models import Comments, Course
 
 USER = get_user_model()
 
@@ -86,10 +86,47 @@ def contact_view(request):
     }
     return render(request, 'dashboard/contact.html', context)
 
-# =================================== Create New Courses Views =================================== 
+# =================================== Course Views =================================== 
 ## check if user is_mentor = True >> decorators
 def create_course(request):
+    if request.method == 'POST':
+        form = CourseCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.mentor = request.user
+            course.save()
+            return redirect('dashboard:course_detail', course_id=course.id)
+    else:
+        form = CourseCreateForm()
     context = {
+        'form': form,
         'title' : 'ایجاد دوره'
     }
     return render(request, 'dashboard/create_course.html', context)
+
+
+def course_content(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    if request.method == 'POST':
+        form = CourseContentForm(request.POST, request.FILES)
+        if form.is_valid():
+            content = form.save(commit=False)
+            content.course = course
+            content.save()
+            return redirect('dashboard:course_content', course_id=course.id)
+    else:
+        form = CourseContentForm()
+    context = {
+        'form': form,
+        'title': 'جزییات دوره',
+    }
+    return render(request, 'dashboard/course_content.html', context)
+
+def course_detail(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    return render(request, 'dashboard/course_detail.html', {'items': course})
+    
+
+def course_list(request):
+    courses = Course.objects.all()
+    return render(request, 'dashboard/course_list.html', {'items': courses})

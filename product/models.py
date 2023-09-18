@@ -22,8 +22,7 @@ class CustomManager(models.Manager):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to='product/%Y/%m/%d')
-    # price= models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
-    price = models.IntegerField()
+    price= models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
     slug = models.SlugField()
     tags = TaggableManager()
     content = RichTextField()
@@ -69,27 +68,9 @@ class Product(models.Model):
         #     img.save(self.image.path)    
 
 
-class Course(models.Model):
-    Mentor = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='courses')
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    image = models.ImageField(upload_to='product/courses/%Y/')
-    # price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
-    price = models.IntegerField()
-
-
-class Enrollment(models.Model):
-    student = models.ForeignKey(USER, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    date_enrolled = models.DateTimeField(auto_now_add=True)
-
-
 class Order(models.Model):
     user = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='oreders')
-    price = models.IntegerField()
-    # address = models.CharField(max_length=300)
-    # email = models.EmailField(blank=True, null=True)
-    # phone = models.CharField(max_length=12)
+    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
     created_at = models.DateTimeField(auto_now_add=True)
     is_paid = models.BooleanField(default=False)
 
@@ -105,7 +86,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items')
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
 
     def __str__(self):
         return self.order.user.phone

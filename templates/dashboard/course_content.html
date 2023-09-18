@@ -1,0 +1,27 @@
+{% extends 'dashboard/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+دوره ها
+{% endblock %}
+
+
+{% block content %}
+
+<h1>{{ course.title }}</h1>
+<p>{{ course.description }}</p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% comment %} {{ form.as_p }} {% endcomment %}
+    {{form.title}}
+    <br>
+    
+    {{form.course}}
+    {% render_field form.file class+='dropzone dz-clickable'%}
+    <button type="submit" class="btn btn-success">افزودن</button>
+</form>
+
+
+
+{% endblock %}

@@ -1,3 +1,11 @@
+PRIORITY
+• determine free products and set is_mentor to true
+• user can contact admin easier
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+• courses list
+• discount filter for all products with expire time 
 • user skills auto complete field https://django-autocomplete-light.readthedocs.io/en/master/tutorial.html
 • add product cart ( user buy a product as time >> user allow to create coureses )
 • Add comment view for news and products

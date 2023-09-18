@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm
 from django.forms import widgets
-from .models import Comments
+from .models import Comments, Course, CourseContent
 
 USER = get_user_model()
 
@@ -49,3 +49,35 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ['subject', 'message']
+
+
+class CourseCreateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CourseCreateForm, self).__init__(*args, **kwargs)
+
+        self.fields['title'].widget = widgets.TextInput(
+            attrs={'placeholder': 'نام دوره', 'class':'form-control text-right'}
+        )
+        self.fields['description'].widget = widgets.Textarea(
+            attrs={'placeholder': 'توضیحات', 'class':'form-control text-right'}
+        )
+        self.fields['price'].widget = widgets.TextInput(
+            attrs={'placeholder': 'قیمت', 'class':'form-control text-right'}
+        )
+
+    class Meta:
+        model = Course
+        fields = ['title', 'description', 'image', 'price']
+
+
+class CourseContentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CourseContentForm, self).__init__(*args, **kwargs)
+
+        self.fields['title'].widget = widgets.TextInput(
+            attrs={'placeholder': 'نام دوره', 'class':'form-control text-right'}
+        )
+
+    class Meta:
+        model = CourseContent
+        fields = ['course', 'title', 'file']

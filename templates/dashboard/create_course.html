@@ -8,43 +8,19 @@
 
 {% block content %}
 
+<form method="post" enctype="multipart/form-data"> 
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success">تایید</button>
+
+</form>
 
 
-<!-- start project list -->
-<table class="table table-striped projects">
-  <thead>
-    <tr>
-        <th style="width: 15%; text-align: right;">تغییرات</th>
-        <th style="width: 10%; text-align: right; ">وضعیت</th>
-        <th style="width: 30%; text-align: right;">نام دوره</th>
-        <th style="width: 5%; text-align: right;">#</th>
-    </tr>
-  </thead>
-  {% comment %} courses {% endcomment %}
-  <tbody>
-    <tr>
-        <td>
-          <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-          <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-          <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-        </td>
-        <td>
-          <button type="button" class="btn btn-success btn-xs">در حال برگزاری</button>
-          <button type="button" class="btn btn-warning btn-xs">اتمام دوره</button>
-        </td>
-      <td>نام دوره</td>
-      <td>
-        <a>ID</a>
-        <br />
-        <small>Created 01.01.2015</small>
-      </td>
-    </tr>
-    
-  </tbody>
-</table>
-<!-- end project list -->
-
-
+{% comment %}
+  
+  
+{% endcomment %}
+  
 <!-- /page content -->
 
 

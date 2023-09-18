@@ -1,0 +1,47 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block title %}
+لیست دوره ها
+{% endblock %}
+
+
+{% block content %}
+
+  <!-- start project list -->
+  <table class="table table-striped projects">
+    <thead>
+      <tr>
+          <th style="width: 15%; text-align: right;">تغییرات</th>
+          <th style="width: 10%; text-align: right; ">وضعیت</th>
+          <th style="width: 30%; text-align: right;">نام دوره</th>
+          <th style="width: 5%; text-align: right;">#</th>
+      </tr>
+    </thead>
+    <!-- course -->
+    <tbody>
+        {% for item in items %}
+      <tr>
+          <td>
+            <a href="{% url 'dashboard:course_content' item.id %}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> Edit </a>
+            <a href="{% url 'dashboard:course_detail' item.id %}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> View </a>
+            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success btn-xs">s</button>
+            <button type="button" class="btn btn-warning btn-xs">{{item.mentor}}</button>
+          </td>
+        <td>{{item.title}}</td>
+        {% comment %} <td><img src="{{item.image.url}}" style="width:200px"></td> {% endcomment %}
+        <td>
+          <a>{{item.id}}</a>
+          <br />
+          <small>Created </small>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <!-- end project list -->
+  
+{% endblock %}

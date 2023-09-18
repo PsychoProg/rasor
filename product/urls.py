@@ -17,3 +17,9 @@ urlpatterns += [
     path('cart/detail/',views.cart_detail,name='cart_detail'),      
     path('item_clear/<int:id>/', views.item_clear, name='item_clear'),  
 ]
+
+# ZarinPal
+urlpatterns = [
+    path('request/<int:pk>/', views.SendRequestView.as_view(), name='request'),
+    path('verify/', views.verify , name='verify'),
+]

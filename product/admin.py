@@ -8,7 +8,7 @@ class OrderItemAdmin(admin.TabularInline):
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['user', 'is_paid', 'created_at']
+    list_display = ['user', 'id', 'is_paid', 'created_at']
     inlines = [OrderItemAdmin]
 
 
