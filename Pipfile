@@ -15,6 +15,7 @@ django-bootstrap-v5 = "*"
 django-cleanup = "*"
 django-admin-persian-fonts = "*"
 django-shopping-cart = "*"
+requests = "*"
 
 [dev-packages]
 

@@ -28,7 +28,7 @@
         <ul class="nav side-menu">
           <li><a><i class="fa fa-home"></i> صفحه اصلی <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="{% url 'dashboard:dashboard' %}"> داشبورد </a></li>
+              {% comment %} <li><a href="{% url 'dashboard:dashboard' %}"> داشبورد </a></li> {% endcomment %}
               <li><a href="{% url 'dashboard:profile' %}"> پروفایل </a></li>
               <li><a href="{% url 'home:home' %}"> صفحه اصلی </a></li>
               {% if request.user.is_staff %}
@@ -45,7 +45,9 @@
           <li><a><i class="fa fa-mortar-board"></i> درس ها و دوره ها <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="{% url 'dashboard:course_list' %}">دوره های من</a></li>
+              {% if request.user.is_mentor%}
               <li><a href="{% url 'dashboard:create_course' %}">ایجاد دوره جدید</a></li>
+              {%endif%}
             </ul>
           </li>
           <li><a><i class="fa fa-archive"></i> محصولات <span class="fa fa-chevron-down"></span></a>
@@ -74,6 +76,7 @@
             <ul class="nav child_menu">
               <li><a href="#"> درباره ما </a></li>
               <li><a href="{% url 'dashboard:contact_us' %}"> تماس با ما </a></li>
+              <li><a href="#"> اساتید </a></li>
             </ul>
           </li>
           

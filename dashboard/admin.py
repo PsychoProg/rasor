@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Comments, Course, CourseContent
+from .models import Comments, Course, CourseContent, CourseMessage, CoursePracticeFiles
 
 
 @admin.register(Comments)
@@ -12,3 +12,5 @@ class CommectsAdmin(admin.ModelAdmin):
 
 admin.site.register(Course)
 admin.site.register(CourseContent)
+admin.site.register(CourseMessage)
+admin.site.register(CoursePracticeFiles)

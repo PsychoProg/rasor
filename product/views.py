@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import Count 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -162,3 +163,12 @@ def verify(request, authority):
             return {'status': False, 'code': str(response['Status'])}
     return response
 
+def apply(request):
+    if request.method == "POST":
+        user = request.user
+        user.is_mentor = True
+        user.save()
+        print("="*20,"\n",request.user.is_mentor)
+        return HttpResponse("done")
+    return HttpResponse("fucked")
+    

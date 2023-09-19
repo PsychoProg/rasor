@@ -6,8 +6,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.urls import reverse
 from django.core.mail import send_mail
-from .forms import ProfileUpdateForm, CommentForm, CourseCreateForm, CourseContentForm
-from .models import Comments, Course
+from .forms import ProfileUpdateForm, CommentForm, CourseCreateForm, CourseContentForm, MessageForm
+from .models import Comments, Course, CourseMessage
+from account.models import Student
+from core.decorators import mentor_required
 
 USER = get_user_model()
 
@@ -21,7 +23,9 @@ def dashboard(request):
         
 # =================================== Profile Views =================================== 
 def profile(request):
+    msg = CourseMessage.objects.all()
     context = {
+        'msg': msg,
         'title' : 'پروفایل'
     }
     return render(request, 'dashboard/profile.html', context)
@@ -87,7 +91,7 @@ def contact_view(request):
     return render(request, 'dashboard/contact.html', context)
 
 # =================================== Course Views =================================== 
-## check if user is_mentor = True >> decorators
+@mentor_required
 def create_course(request):
     if request.method == 'POST':
         form = CourseCreateForm(request.POST, request.FILES)
@@ -105,6 +109,7 @@ def create_course(request):
     return render(request, 'dashboard/create_course.html', context)
 
 
+@mentor_required
 def course_content(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     if request.method == 'POST':
@@ -122,6 +127,7 @@ def course_content(request, course_id):
     }
     return render(request, 'dashboard/course_content.html', context)
 
+
 def course_detail(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     return render(request, 'dashboard/course_detail.html', {'items': course})
@@ -130,3 +136,28 @@ def course_detail(request, course_id):
 def course_list(request):
     courses = Course.objects.all()
     return render(request, 'dashboard/course_list.html', {'items': courses})
+
+# =================================== Course Content Views =================================== 
+@login_required
+@mentor_required
+def create_message(request, course_id):
+    """ mentor create messages for the course """
+    form = MessageForm()
+    course = get_object_or_404(Course, id=course_id)
+    if request.method == "POST":
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            content = form.cleaned_data['content']
+            user = request.user 
+            message = CourseMessage.objects.create(
+                course=course,
+                sender=user,
+                content=content,
+            )
+
+            return redirect('dashboard:course_detail', course_id=course_id)
+    context = {
+        'form': form,
+        'course': course,
+    }
+    return render(request, 'dashboard/create_message.html', context)

@@ -8,6 +8,7 @@ urlpatterns = [
     path('<int:pk>/<slug:slug>', views.product_detail, name='product_detail'),
     path('order/detail/<int:pk>', views.order_detail, name='order_detail'),
     path('order/add', views.create_order, name='create_order'),
+    path('apply/', views.apply, name="apply"),
 ]
 
 # Cart URLs
@@ -19,7 +20,7 @@ urlpatterns += [
 ]
 
 # ZarinPal
-urlpatterns = [
+urlpatterns += [
     path('request/<int:pk>/', views.SendRequestView.as_view(), name='request'),
     path('verify/', views.verify , name='verify'),
 ]

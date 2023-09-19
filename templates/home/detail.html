@@ -62,7 +62,11 @@
         {% endif %}
         {% if request.user.is_authenticated%}
             <div class="card-btn"><a class="btn btn-primary" href="{% url 'product:cart_add' items.pk %}"><h3>افزودن به سبد خرید</h3></a></h3></div>
-            
+            <!-- change this for products -->
+            <form method="post" action="{% url 'product:apply' %}">
+                {%csrf_token%}
+                <button type="submit" class="btn btn-secondary">mentor</button>
+            </form>
         {% else %}
             <div class="card-btn"><a class="btn btn-primary" href="{% url 'login' %}"><h3>برای تهیه محصولات ثبت نام کنید</h3></a></div>
 

@@ -18,7 +18,7 @@
     <p>{{items.description}}</p>
     
 </div>
-
-
-
+{% if request.user.is_mentor %}
+<a class="btn btn-primary" href="{% url 'dashboard:create_message' course_id=items.id %}">ایجاد اعلان</a>
+{% endif %}
 {% endblock %}

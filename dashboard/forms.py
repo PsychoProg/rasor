@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm
 from django.forms import widgets
-from .models import Comments, Course, CourseContent
+from .models import Comments, Course, CourseContent, CourseMessage
 
 USER = get_user_model()
 
@@ -81,3 +81,12 @@ class CourseContentForm(forms.ModelForm):
     class Meta:
         model = CourseContent
         fields = ['course', 'title', 'file']
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = CourseMessage
+        fields = ['content']
+
+    content = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control text-right', 
+        'placeholder':"پیام خود را وارد کنید" }))

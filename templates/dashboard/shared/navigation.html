@@ -80,7 +80,7 @@
                       <img src="{{ request.user.picture.url }}" alt="">
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right text-right">
-                      <li><a href="javascript:;"> پروفایل</a></li>
+                      <li><a href="{% url 'dashboard:profile' %}"> پروفایل</a></li>
                       <li>
                         <a href="javascript:;">
                           {% comment %} <span class="badge bg-red pull-left">50%</span> {% endcomment %}
