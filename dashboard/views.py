@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import HttpResponseForbidden
 from django.urls import reverse
 from django.core.mail import send_mail
 from .forms import ProfileUpdateForm, CommentForm, CourseCreateForm, CourseContentForm, MessageForm
@@ -24,8 +26,7 @@ def dashboard(request):
 def profile(request):
     registered_courses = request.user.courses_registered.all()
     messages = CourseMessage.objects.filter(course__registrations__student=request.user)
-    print('*'*30)
-    print(messages)
+
     context = {
         'registered_courses': registered_courses,
         'msg': messages,
@@ -94,6 +95,7 @@ def contact_view(request):
     return render(request, 'dashboard/contact.html', context)
 
 # =================================== Course Views =================================== 
+@login_required
 @mentor_required
 def create_course(request):
     if request.method == 'POST':
@@ -112,6 +114,7 @@ def create_course(request):
     return render(request, 'dashboard/create_course.html', context)
 
 
+@login_required
 @mentor_required
 def course_content(request, course_id):
     course = get_object_or_404(Course, id=course_id)
@@ -131,6 +134,7 @@ def course_content(request, course_id):
     return render(request, 'dashboard/course_content.html', context)
 
 
+@login_required
 def course_detail(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     messages = course.messages.all()
@@ -138,6 +142,10 @@ def course_detail(request, course_id):
     registered_students_ids = registered_students.values_list('student_id', flat=True)
     # implement student msg form
     student_messages = CourseMessage.objects.filter(sender=request.user, course__id__in=registered_students_ids)
+
+    # forbbid users who did not registered from accessing detail
+    if not CourseRegistered.objects.filter(course=course, student=request.user).exists():
+        return HttpResponseForbidden()
 
     context = {
         'course': course,
@@ -150,7 +158,8 @@ def course_detail(request, course_id):
 
 
 def course_list(request):
-    courses = Course.objects.all()
+    courses_registered = CourseRegistered.objects.filter(student=request.user)
+    courses = [cr.course for cr in courses_registered]
     context = {
         'items': courses,
         'title': 'لیست دوره ها'    
