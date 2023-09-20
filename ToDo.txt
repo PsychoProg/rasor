@@ -29,4 +29,6 @@ Done • display only last 4 products and news on homepage
 Done • Home page share links
 Done • news and blog page
 Done • products page
-Done• about us page 
+Done • about us page 
+Done • dashboard footer fixed
+Done • dashboard menu fixed

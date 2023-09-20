@@ -59,7 +59,7 @@
             <td><button type="button" class="btn btn-primary btn-xs">{{item.mentor.username}}</button></td>
           {% endif %}
         <td>
-          <h4 class="text text-primary">{{item.title}}</h4>
+          <a href="{% url 'dashboard:course_detail' item.id %}"><h4 class="text text-primary">{{item.title}}</h4></a>
         </td>
         <td>
         </td>
