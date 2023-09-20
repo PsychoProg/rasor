@@ -3,6 +3,11 @@ PRIORITY
 • user can contact admin easier
 • user by a course and become the student in student model
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Production
+• change dashboard/base.html footer content 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Admin
+• Contacts 
+• Pricing tables
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 • student msg form
 • student contact with mentor through email and contact form

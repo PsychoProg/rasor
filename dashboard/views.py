@@ -139,14 +139,24 @@ def course_detail(request, course_id):
     # implement student msg form
     student_messages = CourseMessage.objects.filter(sender=request.user, course__id__in=registered_students_ids)
 
-    context = {'items': course, 'messages': messages, 'student_messages': student_messages}
+    context = {
+        'items': course,
+        'messages': messages, 
+        'student_messages': student_messages,
+        'title': course.title,
+    }
     return render(request, 'dashboard/course_detail.html', context)
         
 
 
 def course_list(request):
     courses = Course.objects.all()
-    return render(request, 'dashboard/course_list.html', {'items': courses})
+    context = {
+        'items': courses,
+        'title': 'لیست دوره ها'    
+    }
+    
+    return render(request, 'dashboard/course_list.html', context)
 
 # =================================== Course Content Views =================================== 
 @login_required
@@ -170,5 +180,6 @@ def create_message(request, course_id):
     context = {
         'form': form,
         'course': course,
+        'title': 'ایجاد اعلان',
     }
     return render(request, 'dashboard/create_message.html', context)
