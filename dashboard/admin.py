@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Comments, Course, CourseContent, CourseMessage, CoursePracticeFiles
+from .models import Comments, Course, CourseContent, CourseMessage, CoursePracticeFiles, CourseRegistered
 
 
 @admin.register(Comments)
@@ -14,3 +14,4 @@ admin.site.register(Course)
 admin.site.register(CourseContent)
 admin.site.register(CourseMessage)
 admin.site.register(CoursePracticeFiles)
+admin.site.register(CourseRegistered)

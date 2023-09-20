@@ -4,6 +4,7 @@ PRIORITY
 • user by a course and become the student in student model
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+• student msg form
 • student contact with mentor through email and contact form
 • courses list
 • discount filter for all products with expire time 

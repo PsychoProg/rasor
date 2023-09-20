@@ -7,8 +7,7 @@ from django.contrib import messages
 from django.urls import reverse
 from django.core.mail import send_mail
 from .forms import ProfileUpdateForm, CommentForm, CourseCreateForm, CourseContentForm, MessageForm
-from .models import Comments, Course, CourseMessage
-from account.models import Student
+from .models import Comments, Course, CourseMessage, CourseRegistered
 from core.decorators import mentor_required
 
 USER = get_user_model()
@@ -23,10 +22,14 @@ def dashboard(request):
         
 # =================================== Profile Views =================================== 
 def profile(request):
-    msg = CourseMessage.objects.all()
+    registered_courses = request.user.courses_registered.all()
+    messages = CourseMessage.objects.filter(course__registrations__student=request.user)
+    print('*'*30)
+    print(messages)
     context = {
-        'msg': msg,
-        'title' : 'پروفایل'
+        'registered_courses': registered_courses,
+        'msg': messages,
+        'title' : 'پروفایل',
     }
     return render(request, 'dashboard/profile.html', context)
 
@@ -130,8 +133,16 @@ def course_content(request, course_id):
 
 def course_detail(request, course_id):
     course = get_object_or_404(Course, id=course_id)
-    return render(request, 'dashboard/course_detail.html', {'items': course})
-    
+    messages = course.messages.all()
+    registered_students = CourseRegistered.objects.filter(course=course)
+    registered_students_ids = registered_students.values_list('student_id', flat=True)
+    # implement student msg form
+    student_messages = CourseMessage.objects.filter(sender=request.user, course__id__in=registered_students_ids)
+
+    context = {'items': course, 'messages': messages, 'student_messages': student_messages}
+    return render(request, 'dashboard/course_detail.html', context)
+        
+
 
 def course_list(request):
     courses = Course.objects.all()

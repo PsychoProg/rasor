@@ -53,27 +53,27 @@ class ValidateProfile(models.Model):
         return full_name
 
 
-class Student(models.Model):
-    student = models.OneToOneField(USER, on_delete=models.CASCADE, related_name='students')
-    courses = models.ManyToManyField(Course)
+# class Student(models.Model):
+#     student = models.OneToOneField(USER, on_delete=models.CASCADE, related_name='students')
+#     courses = models.ManyToManyField(Course)
 
-    def __str__(self):
-        return self.student.get_full_name
+#     def __str__(self):
+#         return self.student.get_full_name
 
-    def get_absolute_url(self):
-        return reverse("dashboard:profile", kwargs={"pk": self.pk})
+#     def get_absolute_url(self):
+#         return reverse("dashboard:profile", kwargs={"pk": self.pk})
 
-    def delete(self, *args, **kwargs):
-        self.student.delete()
-        super().delete(*args, **kwargs)
+#     def delete(self, *args, **kwargs):
+#         self.student.delete()
+#         super().delete(*args, **kwargs)
 
 
 
-class DepartmentHead(models.Model):
-    pass
+# class DepartmentHead(models.Model):
+#     pass
 
-class Artisan(models.Model):
-    pass
+# class Artisan(models.Model):
+#     pass
 
-class Mentor(models.Model):
-    pass
+# class Mentor(models.Model):
+#     pass

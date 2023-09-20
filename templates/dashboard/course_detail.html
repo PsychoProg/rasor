@@ -21,4 +21,13 @@
 {% if request.user.is_mentor %}
 <a class="btn btn-primary" href="{% url 'dashboard:create_message' course_id=items.id %}">ایجاد اعلان</a>
 {% endif %}
+
+<ul>
+{% for msg in messages %}
+<li>
+    <strong>{{msg.sender}}</strong> {{msg.content}}
+</li>
+{% endfor %}
+</ul>
+
 {% endblock %}
