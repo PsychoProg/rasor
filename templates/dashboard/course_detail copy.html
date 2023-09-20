@@ -1,0 +1,33 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block title %}
+دوره ها
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="">     
+    <h3>{{items.title}}</h3>
+    <img src="{{items.image.url}}" style="width:300px; height:300px;">
+    <br>
+    
+    <p>{{items.description}}</p>
+    
+</div>
+{% if request.user.is_mentor %}
+<a class="btn btn-primary" href="{% url 'dashboard:create_message' course_id=items.id %}">ایجاد اعلان</a>
+{% endif %}
+
+<ul>
+{% for msg in messages %}
+<li>
+    <strong>{{msg.sender}}</strong> {{msg.content}}
+</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

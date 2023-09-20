@@ -140,7 +140,7 @@ def course_detail(request, course_id):
     student_messages = CourseMessage.objects.filter(sender=request.user, course__id__in=registered_students_ids)
 
     context = {
-        'items': course,
+        'course': course,
         'messages': messages, 
         'student_messages': student_messages,
         'title': course.title,
