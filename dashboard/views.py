@@ -104,6 +104,7 @@ def create_course(request):
             course = form.save(commit=False)
             course.mentor = request.user
             course.save()
+            CourseRegistered.objects.create(course=course, student=request.user)
             return redirect('dashboard:course_detail', course_id=course.id)
     else:
         form = CourseCreateForm()
@@ -163,6 +164,16 @@ def course_list(request):
     context = {
         'items': courses,
         'title': 'لیست دوره ها'    
+    }
+    
+    return render(request, 'dashboard/course_list.html', context)
+
+
+def all_course_list(request):
+    courses = Course.objects.all()
+    context = {
+        'items': courses,
+        'title': 'لیست تمامی دوره ها'    
     }
     
     return render(request, 'dashboard/course_list.html', context)

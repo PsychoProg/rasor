@@ -8,6 +8,10 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('register/', views.registeration_view, name='register'),
     path('reset-code/', views.check_reset_otp_view, name='reset_code'),
+    path('resend-code/', views.resend_otp_view, name='resend_otp_code'),
+    path('check-otp/', views.check_otp_view, name='check_otp'),
+    path('change-email/', views.change_email_view, name='change_email'),
+
     path('activate-email/', views.check_otp_view, name='activate_email'),
     # path("login/", views.MyLoginView.as_view(), name='login'),
     # path('register/', views.RegisterView.as_view(), name='register'),

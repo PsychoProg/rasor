@@ -10,7 +10,19 @@
 
 <form method="post" enctype="multipart/form-data"> 
   {% csrf_token %}
-  {{ form.as_p }}
+  
+  {{ form.title }}
+  <br>
+  {{ form.description }}
+  <br>
+  <div>
+    <label>:تصویر دوره</label>
+    {{ form.image }}
+  </div>
+  <br>
+  {{ form.price }}
+  
+  <br>
   <button type="submit" class="btn btn-success">تایید</button>
 
 </form>

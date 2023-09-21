@@ -62,7 +62,7 @@ class CourseCreateForm(forms.ModelForm):
             attrs={'placeholder': 'توضیحات', 'class':'form-control text-right'}
         )
         self.fields['price'].widget = widgets.TextInput(
-            attrs={'placeholder': 'قیمت', 'class':'form-control text-right'}
+            attrs={'placeholder': 'قیمت (ریال)', 'class':'form-control text-right'}
         )
 
     class Meta:

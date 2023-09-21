@@ -1,13 +1,15 @@
 from django.contrib.auth import authenticate, login
 from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
-from random import randint
 from django.shortcuts import redirect, render
+from django.contrib.auth import get_user_model
+from core.decorators import redirect_authenticated_user
 from .forms import CustomLoginForm, RegisterForm, OtpForm
 from .models import OtpCode
 from .utils import send_activation_code
-from core.decorators import redirect_authenticated_user
+from random import randint
 
+USER = get_user_model()
 
 @redirect_authenticated_user
 def login_view(request):
@@ -39,8 +41,6 @@ def registeration_view(request):
         form = RegisterForm(request.POST or None)
         if form.is_valid():
             user = form.save(commit=False)
-            # profile = Profile(user=user)
-            # profile.save()
             user.is_active = False
             user.save(True)
 
@@ -54,6 +54,7 @@ def registeration_view(request):
                 user.delete()
                 messages.error(request, _('کد ارسال نشد'))
             else:
+                request.session['email'] = user.email
                 messages.success(
                     request, _(f'یک ایمیل تایید برای شما ارسال شد - {user.email}'))
                 return redirect('activate_email')
@@ -64,6 +65,14 @@ def registeration_view(request):
 
 @redirect_authenticated_user
 def check_otp_view(request):
+    email = request.session.get('email')
+    if not email:
+        return redirect('register')
+    try:
+        user = USER.objects.get(email=email)
+    except USER.DoesNotExist:
+        return redirect('register')
+        
     if request.method == 'POST':
         form = OtpForm(request.POST)
         if form.is_valid():
@@ -76,6 +85,30 @@ def check_otp_view(request):
     else:
         form = OtpForm()
     return render(request, 'account/user_otp.html', {'form': form})
+
+@redirect_authenticated_user
+def resend_otp_view(request):
+    email = request.session.get('email')
+    if not email:
+        return redirect('register')
+    try:
+        user = USER.objects.get(email=email)
+    except USER.DoesNotExist:
+        return redirect('register')
+    code = randint(1000, 9999)        
+    otp = OtpCode(code=code, user=user)
+    otp.save(True)
+    try:
+        send_activation_code(user.email, code)
+    except:
+        otp.delete()
+        messages.error(request, _('کد ارسال نشد'))
+    else:
+        messages.success(
+            request, _(f'یک کد تایید برای شما ارسال شد - {user.email}')
+        )
+        return redirect('check_otp')
+    
 
 @redirect_authenticated_user
 def check_reset_otp_view(request):
@@ -91,4 +124,12 @@ def check_reset_otp_view(request):
         form = OtpForm()
     return render(request, 'account/user_otp.html', {'form': form})
 
+
+def change_email_view(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        if email:
+            request.session['email'] = email
+            return redirect('check_otp')
+    return render(request, 'account/change_email.html')
 
