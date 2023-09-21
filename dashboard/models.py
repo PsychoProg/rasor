@@ -34,6 +34,9 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "دوره"
+        verbose_name_plural = "دوره ها"
 
 class CourseRegistered(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='registrations')
@@ -42,6 +45,10 @@ class CourseRegistered(models.Model):
 
     def __str__(self):
         return f"{self.course.title} {self.student.username}"
+
+    class Meta:
+        verbose_name = "ثبت نام"
+        verbose_name_plural = "ثبت نام ها"
 
 
 class CourseContent(models.Model):
@@ -52,6 +59,11 @@ class CourseContent(models.Model):
     
     def __str__(self):
         return f"{self.course.title} {self.title}"
+
+    class Meta:
+        ordering = ['created_at']
+        verbose_name = "محتوای دوره"
+        verbose_name_plural = "محتوای دوره ها"
 
 
 class CourseMessage(models.Model):
@@ -64,15 +76,23 @@ class CourseMessage(models.Model):
     def __str__(self):
         return f"{self.sender} - {self.course}"
 
+    class Meta:
+        ordering = ['created_at']
+        verbose_name = "اعلان دوره"
+        verbose_name_plural = "اعلان دوره"
+
 
 class CoursePracticeFiles(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
     uploaded_by = models.ForeignKey(USER, on_delete=models.CASCADE)
     file = models.FileField(upload_to='practice_files/%Y/%m/%d/')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title 
 
-class Enrollment(models.Model):
-    student = models.ForeignKey(USER, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    date_enrolled = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ['created_at']
+        verbose_name = "فایل تمرین"
+        verbose_name_plural = "فایل های تمرین "

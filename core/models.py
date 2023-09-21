@@ -62,3 +62,7 @@ class User(AbstractUser):
         if self.picture.url != settings.MEDIA_URL + 'default.png':
             self.picture.delete()
         super().delete(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "کاربر"
+        verbose_name_plural = "کاربر ها"
