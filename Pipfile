@@ -16,6 +16,9 @@ django-cleanup = "*"
 django-admin-persian-fonts = "*"
 django-shopping-cart = "*"
 requests = "*"
+pip = "*"
+install = "*"
+python-magic = "*"
 
 [dev-packages]
 

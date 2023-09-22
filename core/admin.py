@@ -9,8 +9,6 @@ class UserAdmin(admin.ModelAdmin):
 
     class Meta:
         managed = True
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
 
 
 

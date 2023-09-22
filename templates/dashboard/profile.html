@@ -78,9 +78,7 @@
                         <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab"
                                 data-toggle="tab" aria-expanded="true">پیام ها</a>
                         </li>
-                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab"
-                                data-toggle="tab" aria-expanded="false">Projects Worked on</a>
-                        </li>
+                        
                         <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2"
                                 data-toggle="tab" aria-expanded="false">Profile</a>
                         </li>
@@ -95,15 +93,16 @@
                             <ul class="messages">
                                 {% for item in msg %}
                                 <li>
-                                    <img src="{{ item.sender.picture.url }}" class="avatar" alt="Avatar">
-                                    <div class="message_date">
+                                    <img src="{{ item.sender.picture.url }}" class="avatar" alt="Avatar" style="float:right;">
+                                    <div class="message_date" style="float:left">
                                         <p class="date text-info"></p>
                                         <p class="date text-info">{{item.created_at.time|time:"f"}}</p>
                                         <p class="month">{{item.created_at.month}}/{{item.created_at.day}}</p>
                                     </div>
                                     <div class="message_wrapper">
-                                        <h4 class="heading">{{ item.sender.username }}</h4>
-                                        <blockquote class="message">{{ item.content }}</blockquote>
+                                        <h4 class="heading"> {{ item.sender.get_full_name }} </h4>
+                                        <br>
+                                        <p class="message">{{ item.content }}</p>
                                         <br />
                                         <p class="url">
                                             <span class="fs1 text-info" aria-hidden="true"
@@ -120,21 +119,14 @@
                             <!-- end recent activity -->
                         </div>
                         <!-- profile tab -->
-                        <div role="tabpanel" class="tab-pane fade" id="tab_content2"
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content3"
                             aria-labelledby="profile-tab">
                             <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin
                                 coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next
                                 level wes anderson artisan four loko farm-to-table craft beer twee. Qui
                                 photo booth letterpress, commodo enim craft beer mlkshk </p>
                         </div>
-                        <!-- tab -->
-                        <div role="tabpanel" class="tab-pane fade" id="tab_content2"
-                            aria-labelledby="profile-tab2">
-                            <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin
-                                coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next
-                                level wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                                photo booth letterpress, commodo enim craft beer mlkshk </p>
-                        </div>
+                        
                     </div>
         </div>
 

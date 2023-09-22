@@ -30,7 +30,7 @@ class Cart:
             self.cart[unique] = {
                 'user_id': self.request.user.id,
                 'product_id': product.id,
-                'name': product.name,
+                'title': product.title,
                 'price': int(product.price),
             }
         self.save()

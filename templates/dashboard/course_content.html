@@ -14,11 +14,24 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% comment %} {{ form.as_p }} {% endcomment %}
-    {{form.title}}
+    <div>
+        <label>یک عنوان برای فایل انتخاب کنید</label>
+        {{form.title}}
+    </div>
     <br>
     
-    {{form.course}}
-    {% render_field form.file class+='dropzone dz-clickable'%}
+    {% comment %} <div>
+        <label>دوره مد نظر را انتخاب کنید</label>
+        <br>
+        {{form.course}}
+    </div>
+    <br> {% endcomment %}
+    <div>
+        <label>فایل مد نظر را انتخاب کنید</label>
+        {{ form.file }}
+        {% comment %} {% render_field form.file class+='dropzone dz-clickable'%} {% endcomment %}
+    </div>
+    <br>
     <button type="submit" class="btn btn-success">افزودن</button>
 </form>
 

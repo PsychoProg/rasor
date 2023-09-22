@@ -14,10 +14,10 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'status', 'created_at', 'id']
+    list_display = ['title', 'status', 'created_at', 'id']
     list_filter = ['status'] 
-    search_fields = ['id', 'name']
-    prepopulated_fields = {'slug': ['name']}
+    search_fields = ['id', 'title']
+    prepopulated_fields = {'slug': ['title']}
     date_hierarchy = 'published_at'
     ordering = ['id']
     # autocomplete_fields = ['tags']

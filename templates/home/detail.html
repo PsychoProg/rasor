@@ -55,11 +55,9 @@
     <div class="container">
         {% if items  %}
 
-        {% if items.name %}
-            <h4 class="card-title">{{items.name|markdown}}</h4>
-        {% else %}
-            <h4 class="card-title">{{items.title|markdown}}</h4>
-        {% endif %}
+        
+        <h4 class="card-title">{{items.title|markdown}}</h4>
+        
         {% if request.user.is_authenticated%}
             <div class="card-btn"><a class="btn btn-primary" href="{% url 'product:cart_add' items.pk %}"><h3>افزودن به سبد خرید</h3></a></h3></div>
             <!-- change this for products -->

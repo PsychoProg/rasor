@@ -75,12 +75,13 @@ class CourseContentForm(forms.ModelForm):
         super(CourseContentForm, self).__init__(*args, **kwargs)
 
         self.fields['title'].widget = widgets.TextInput(
-            attrs={'placeholder': 'نام دوره', 'class':'form-control text-right'}
+            attrs={'placeholder': 'عنوان فایل', 'class':'form-control text-right'}
         )
 
     class Meta:
         model = CourseContent
-        fields = ['course', 'title', 'file']
+        # fields = ['course', 'title', 'file']
+        fields = ['title', 'file']
 
 class MessageForm(forms.ModelForm):
     class Meta:

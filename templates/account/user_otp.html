@@ -21,7 +21,7 @@
         <p class="text-muted text-right">
             کد ارسال شده را وارد کنید
         </p>
-        <p> email : {{ request.session.email }} </p>
+        <p class="text-muted text-right">{{ request.session.email }} <span> :ایمیل </span></p>
         <form method="post">
             {%csrf_token%}
             {%include 'account/form_snippets.html' with center=True form=form%}             

@@ -125,12 +125,12 @@ def course_content(request, course_id):
             content = form.save(commit=False)
             content.course = course
             content.save()
-            return redirect('dashboard:course_content', course_id=course.id)
+            return redirect('dashboard:course_list')
     else:
         form = CourseContentForm()
     context = {
         'form': form,
-        'title': 'جزییات دوره',
+        'title': 'محتوای دوره',
     }
     return render(request, 'dashboard/course_content.html', context)
 
@@ -143,13 +143,15 @@ def course_detail(request, course_id):
     registered_students_ids = registered_students.values_list('student_id', flat=True)
     # implement student msg form
     student_messages = CourseMessage.objects.filter(sender=request.user, course__id__in=registered_students_ids)
-
+    registered = True 
     # forbbid users who did not registered from accessing detail
     if not CourseRegistered.objects.filter(course=course, student=request.user).exists():
-        return HttpResponseForbidden()
+        # return HttpResponseForbidden()
+        registered = False 
 
     context = {
         'course': course,
+        'registered': registered,
         'messages': messages, 
         'student_messages': student_messages,
         'title': course.title,

@@ -31,7 +31,7 @@ def product_detail(request, pk, slug):
     similar_products = similar_products.annotate(tags_count=Count('tags')).order_by('-created_at')[:4]
     links = ShareLinks.objects.all()
     context = {
-        'title': product.name,
+        'title': product.title,
         'items': product,
         'product_true': True,
         'similar_items': similar_products,
@@ -87,6 +87,13 @@ def create_order(request):
     return redirect('product:order_detail', order.id)
 
 @login_required
+def clear_order(request, pk):
+    order = Order.objects.filter(pk=pk, user=request.user)
+    order.delete()
+    return redirect('product:cart_detail')
+    
+
+@login_required
 def order_detail(request, pk=None):
     order = get_object_or_404(Order, id=pk)
     context = {'order': order}
@@ -118,7 +125,7 @@ class SendRequestView(View):
         request.session['order_id'] = str(order.id)
         data = {
             "MerchantID": settings.MERCHANT,
-            "Amount": order.price, # total price
+            "Amount": float(order.price), # total price >> it can cuase error cause its type 
             "Description": description,
             "Phone": request.user.phone,
             "CallbackURL": CallbackURL,

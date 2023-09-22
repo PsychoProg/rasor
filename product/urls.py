@@ -5,10 +5,11 @@ app_name = 'product'
 
 urlpatterns = [
     path('', views.product_list, name='product_list'),
-    path('<int:pk>/<slug:slug>', views.product_detail, name='product_detail'),
-    path('order/detail/<int:pk>', views.order_detail, name='order_detail'),
-    path('order/add', views.create_order, name='create_order'),
-    path('apply/', views.apply, name="apply"),
+    path('<int:pk>/<slug:slug>/', views.product_detail, name='product_detail'),
+    path('order/detail/<int:pk>/', views.order_detail, name='order_detail'),
+    path('order/add/', views.create_order, name='create_order'),
+    path('order/delete/<int:pk>', views.clear_order, name="clear_order"),
+    path('apply/', views.apply, name="apply"), # delete for production
 ]
 
 # Cart URLs

@@ -47,13 +47,14 @@
               <li><a href="{% url 'dashboard:course_list' %}">دوره های من</a></li>
               {% if request.user.is_mentor%}
               <li><a href="{% url 'dashboard:create_course' %}">ایجاد دوره جدید</a></li>
+              {% comment %} <li><a href="{% url 'dashboard:course_content' %}">افزودن محتوای دوره</a></li> {% endcomment %}
               {%endif%}
+              <li><a href="{% url 'dashboard:all_course_list' %}">لیست دوره ها</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-archive"></i> محصولات <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="#"> لیست محصولات </a></li>
-              <li><a href="{% url 'dashboard:all_course_list' %}"> دوره ها </a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-desktop"></i> وبلاگ <span class="fa fa-chevron-down"></span></a>

@@ -35,7 +35,7 @@
               
             </td>
             <td>
-                <p class="text text-primary h4">{{item.product.name}}</p>
+                <p class="text text-primary h4">{{item.product.title}}</p>
             </td>
         <td>
 
@@ -52,5 +52,9 @@
 <form action="{% url 'product:request' order.id %}" method="post">
     {% csrf_token %}
 <button type="submit" class="btn btn-success">پرداخت</button>
+</form>
+<form action="{% url 'product:clear_order' order.id %}" method="post">
+    {% csrf_token %}
+<button type="submit" class="btn btn-danger">انصراف</button>
 </form>
 {% endblock%}

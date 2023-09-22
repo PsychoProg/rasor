@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Comments, Course, CourseContent, CourseMessage, CoursePracticeFiles, CourseRegistered
+from .models import Comments, Course, CourseContent, CourseMessage, CourseRegistered
 
 
 @admin.register(Comments)
@@ -10,8 +10,13 @@ class CommectsAdmin(admin.ModelAdmin):
     search_fields = ['user', 'subject']
 
 
+@admin.register(CourseContent)
+class CourseContentAdmin(admin.ModelAdmin):
+    list_display = ['course', 'title', 'created_at']
+    list_per_page = 20
+    search_fields = ['course', 'title']
+    list_filter = ['course']
 admin.site.register(Course)
-admin.site.register(CourseContent)
 admin.site.register(CourseMessage)
-admin.site.register(CoursePracticeFiles)
+
 admin.site.register(CourseRegistered)

@@ -50,7 +50,8 @@
                   </li>
                 </ul>
 
-                <a class="btn btn-success"><i class="fa fa-link m-right-xs"></i> مشاهده پروفایل </a>
+                <a class="btn btn-success" href="#"><i class="fa fa-link m-right-xs"></i> مشاهده پروفایل استاد </a>
+                <a class="btn btn-primary" href="{% url 'product:cart_add' course.id %}"><i class="fa fa-inbox m-right-xs"></i> افزودن به سبد خرید</a>
                 <br />
             </div>
             </div>
@@ -66,7 +67,7 @@
             </div>
             <br />
             
-  
+{% if registered %}  
         <div class="" role="tabpanel" data-example-id="togglable-tabs">
           <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
             <li role="presentation" class="active"><a href="#tab_content1" id="msg-tab" role="tab" data-toggle="tab" aria-expanded="true">پیام ها</a>
@@ -99,7 +100,7 @@
             </div>    
           </div>
         </div>
-        
+{% endif %}
 
 
       </div>        
