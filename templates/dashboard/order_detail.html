@@ -31,11 +31,23 @@
           </td>
           {% comment %} <td><img src="{{item.image.url}}" style="width:200px"></td> {% endcomment %}
           <td>
-                <p class="text text-secondary h4">{{item.product.price}} </p>
-              
+            {% if item.product_type == "course" %}
+              <p class="text text-secondary h4">{{item.course.price}} </p>
+            {% elif item.product_type == "product" %}
+              <p class="text text-secondary h4">{{item.product.price}} </p>
+            {% else %}
+              <p class="text text-secondary h4"> ??? </p>
+            {% endif %}
+
             </td>
             <td>
-                <p class="text text-primary h4">{{item.product.title}}</p>
+              {% if item.product_type == "course" %}
+              <p class="text text-secondary h4">{{item.course.title}} </p>
+            {% elif item.product_type == "product" %}
+              <p class="text text-secondary h4">{{item.product.title}} </p>
+            {% else %}
+              <p class="text text-secondary h4"> ??? </p>
+            {% endif %}
             </td>
         <td>
 
@@ -49,12 +61,12 @@
 <br>
 
 <h1 class="text text-primary"><span>قیمت نهایی:‌ </span>{{order.price}}<span> تومان </span></h1>
-<form action="{% url 'product:request' order.id %}" method="post">
+{% comment %} <form action="{% url 'product:request' order.id %}" method="post">
     {% csrf_token %}
 <button type="submit" class="btn btn-success">پرداخت</button>
-</form>
-<form action="{% url 'product:clear_order' order.id %}" method="post">
+</form> {% endcomment %}
+{% comment %} <form action="{% url 'product:clear_order' order.id %}" method="post">
     {% csrf_token %}
 <button type="submit" class="btn btn-danger">انصراف</button>
-</form>
+</form> {% endcomment %}
 {% endblock%}

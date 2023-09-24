@@ -4,10 +4,11 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _ 
 from django.utils.text import slugify
-from taggit.managers import TaggableManager
 from django.contrib.auth import get_user_model
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
+from taggit.managers import TaggableManager
 from decimal import Decimal
+from dashboard.models import Course 
 from ckeditor.fields import RichTextField
 from PIL import Image
 
@@ -22,7 +23,8 @@ class CustomManager(models.Manager):
 class Product(models.Model):
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to='product/%Y/%m/%d')
-    price= models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    # price= models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    price = models.PositiveBigIntegerField(validators=[MaxValueValidator(1001001000)]) # max 100,000,000 T
     slug = models.SlugField()
     tags = TaggableManager()
     content = RichTextField()
@@ -43,7 +45,7 @@ class Product(models.Model):
     published = CustomManager()
 
     def __str__(self):
-        return self.name
+        return self.title
     
     class Meta:
         ordering=['-updated_at']
@@ -70,7 +72,8 @@ class Product(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='oreders')
-    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    # price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    price = models.PositiveBigIntegerField(validators=[MaxValueValidator(1001001000)])
     created_at = models.DateTimeField(auto_now_add=True)
     is_paid = models.BooleanField(default=False)
 
@@ -85,8 +88,11 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items')
-    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    product_type = models.CharField(max_length=10)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items', null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='items', null=True, blank=True)
+    # price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    price = models.PositiveBigIntegerField(validators=[MaxValueValidator(1001001000)])
 
     def __str__(self):
         return self.order.user.phone

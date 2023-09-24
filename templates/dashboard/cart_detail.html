@@ -12,11 +12,16 @@
       
        {% for item in cart %}
       <div class="jumbotron">
-        <h3 class="text text-primary">{{ item.name }}</h3>
+        <h3 class="text text-primary">{{ item.title }}</h3>
         <h4 class="text text-success"><span>قیمت: </span>{{ item.price }} <span>تومان</span></h4>
         
         <br>
-        <a class="btn btn-danger" href="{% url 'product:item_clear' item.product_id %}">حذف از سبد خرید</a>
+        {% comment %} <a class="btn btn-danger" href="{% url 'product:item_clear' item.product_id %}">حذف از سبد خرید</a> {% endcomment %}
+        <form action="{% url 'product:item_clear' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="unique_id" value="{{ item.unique_id }}">
+          <input type="submit" value="حذف از سبد خرید" class="btn btn-danger">
+        </form>
       </div>
       {% endfor%}
       </div>
@@ -25,9 +30,15 @@
         </div>
           
           <br>
-          <a class="btn btn-danger" href="{% url 'product:cart_clear' %}">پاک کردن سبد خرید</a>
+          {% comment %} <a class="btn btn-danger" href="{% url 'product:cart_clear' %}">پاک کردن سبد خرید</a> {% endcomment %}
+          <form method="post" action="{% url 'product:clear_cart' %}">
+            {% csrf_token %}
+          <button class="btn btn-danger">پاک کردن سبد خرید</button>
+          <a class="btn btn-primary" href="{% url 'dashboard:course_list' %}">لیست دوره ها</a>
+          
           <a class="btn btn-primary" href="{% url 'product:product_list' %}">لیست محصولات</a>
           <a class="btn btn-success" href="{% url 'product:create_order' %}">ثبت سفارش</a>
+        </form>
         </div>
         
       </div>

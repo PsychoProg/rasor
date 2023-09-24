@@ -5,10 +5,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views import View
+from django.views.generic import TemplateView, DetailView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .mixins import CartMixin
 import requests
 import json
 from taggit.models import Tag 
 from .models import Product, Order, OrderItem
+from dashboard.models import Course
 from .cart import Cart
 from home.models import ShareLinks
 
@@ -41,56 +45,96 @@ def product_detail(request, pk, slug):
 
 
 # =================================== Cart Views =================================== 
-@login_required
-def cart_add(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.add(product=product)
-    return redirect("product:cart_detail")
+# @login_required
+# def cart_add(request, id):
+#     cart = Cart(request)
+#     product = Product.objects.get(id=id)
+#     cart.add(product=product)
+#     return redirect("product:cart_detail")
 
 
-@login_required
-def item_clear(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.remove(product)
-    return redirect("product:cart_detail")
+# @login_required
+# def item_clear(request, id):
+#     cart = Cart(request)
+#     product = Product.objects.get(id=id)
+#     cart.remove(product)
+#     return redirect("product:cart_detail")
+
+# @login_required
+# def cart_clear(request):
+#     cart = Cart(request)
+#     cart.clear()
+#     return redirect("product:cart_detail")
 
 
-@login_required
-def cart_clear(request):
-    cart = Cart(request)
-    cart.clear()
-    return redirect("product:cart_detail")
+# @login_required
+# def cart_detail(request):
+#     cart = Cart(request)
+#     context = {'cart': cart}
+#     return render(request, 'dashboard/cart_detail.html', context)
 
-@login_required
-def cart_detail(request):
-    cart = Cart(request)
-    context = {'cart': cart}
-    return render(request, 'dashboard/cart_detail.html', context)
+
+class AddToCartView(LoginRequiredMixin, CartMixin, TemplateView):
+    template_name='dashboard/cart_detail.html'
+    def post(self, request, *args, **kwargs):
+        cart = self.get_cart()
+        id = request.POST.get('id')
+        type = request.POST.get('type')
+        if type == 'product':
+            product = get_object_or_404(Product, id=id)
+        elif type == 'course':
+            product = get_object_or_404(Course, id=id)
+        else:
+            return redirect('product:cart_detail')
+        cart.add(product=product, type=type)
+        return redirect('product:cart_detail')
+
+
+class CartItemClear(LoginRequiredMixin, CartMixin, TemplateView):
+    template_name='dashboard/remove_from_cart.html'
+    def post(self, request, *args, **kwargs):
+        cart = self.get_cart()
+        unique = request.POST.get('unique_id')
+        cart.remove(unique)
+        return redirect('product:cart_detail')
+
+
+class ClearCartView(LoginRequiredMixin, CartMixin, TemplateView):
+    template_name='dashboard/cart_detail.html'
+    def post(self, request, *args, **kwargs):
+        cart = self.get_cart()
+        cart.clear()
+        return redirect('product:cart_detail')
+
+class PrintCart(LoginRequiredMixin, CartMixin, TemplateView):
+    template_name='dashboard/cart_detail.html'
+    def post(self, request,*args,**kwargs):
+        cart = self.get_cart()
+        print('*'*30)
+        print(cart)
+        return redirect('product:cart_detail')
+
+
+class CartView(CartMixin, TemplateView, LoginRequiredMixin):
+    template_name='dashboard/cart_detail.html'
 
 # =================================== Order Views =================================== 
-@login_required
-def create_order(request):
-    cart = Cart(request)
-    # create order for current user
-    # create order items from cart session
-    if cart.total() > 0:
-        order = Order.objects.create(user=request.user, price=cart.total())
-        for item in cart:
-            OrderItem.objects.create(order=order, product=item['product'], price=item['price'])
-    else:
-        # if cart was empty redirect to cart detail 
-        return redirect('product:cart_detail')
+# @login_required
+# def create_order(request):
+#     cart = Cart(request)
+#     # create order for current user
+#     # create order items from cart session
+#     if cart.total() > 0:
+#         order = Order.objects.create(user=request.user, price=cart.total())
+#         for item in cart:
+#             OrderItem.objects.create(order=order, product=item['product'], price=item['price'])
+#     else:
+#         # if cart was empty redirect to cart detail 
+#         return redirect('product:cart_detail')
     
-    cart.clear()
-    return redirect('product:order_detail', order.id)
+#     cart.clear()
+#     return redirect('product:order_detail', order.id)
 
-@login_required
-def clear_order(request, pk):
-    order = Order.objects.filter(pk=pk, user=request.user)
-    order.delete()
-    return redirect('product:cart_detail')
     
 
 @login_required
@@ -99,6 +143,53 @@ def order_detail(request, pk=None):
     context = {'order': order}
     # order.items.all >> in template
     return render(request, 'dashboard/order_detail.html', context)
+
+@login_required
+def clear_order(request, pk):
+    order = Order.objects.filter(pk=pk, user=request.user)
+    order.delete()
+    return redirect('product:cart_detail')
+
+
+class CheckoutView(LoginRequiredMixin, CartMixin, TemplateView):
+    """ create order view """
+    template_name = 'dashboard/checkout.html'
+
+    def post(self, request, *args, **kwargs):
+        cart = self.get_cart()
+        order = Order.objects.create(user=request.user, price=cart.total())
+        for item in cart:
+            product_type = item['type']
+            product_id = item['product_id']
+            if product_type == 'product':
+                product = get_object_or_404(Product, id=product_id)
+                OrderItem.objects.create(
+                    order=order,
+                    product=product,
+                    course=None,
+                    product_type=product_type,
+                    price=item['price'],
+                )
+            elif product_type == 'course':
+                course = get_object_or_404(Course, id=product_id)
+                OrderItem.objects.create(
+                    order=order,
+                    product=None,
+                    course=course,
+                    product_type=product_type,
+                    price=item['price'],
+                )
+            else:
+                continue
+            
+        cart.clear()
+        return redirect('product:order_detail', order_id=order.id)
+
+
+# class OrderDetailView(LoginRequiredMixin, CartMixin, DetailView):
+#     model = Order
+#     template_name = 'dashboard/order_detail.html'
+#     context_object_name = 'order'
 
 
 # =================================== Zarin Pal Views =================================== 

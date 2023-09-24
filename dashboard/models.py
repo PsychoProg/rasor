@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django.utils.translation import gettext_lazy as _
@@ -32,7 +32,8 @@ class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to='product/courses/%Y/')
-    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    # price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    price = models.PositiveBigIntegerField(validators=[MaxValueValidator(1001001000)])
 
     def __str__(self):
         return self.title
@@ -40,6 +41,7 @@ class Course(models.Model):
     class Meta:
         verbose_name = "دوره"
         verbose_name_plural = "دوره ها"
+
 
 class CourseRegistered(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='registrations')

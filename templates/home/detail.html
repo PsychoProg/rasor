@@ -59,7 +59,13 @@
         <h4 class="card-title">{{items.title|markdown}}</h4>
         
         {% if request.user.is_authenticated%}
-            <div class="card-btn"><a class="btn btn-primary" href="{% url 'product:cart_add' items.pk %}"><h3>افزودن به سبد خرید</h3></a></h3></div>
+        <form method="post" action="{% url 'product:cart_add' %}">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ items.id }}">
+            <input type="hidden" name="type" value="product">
+            {% comment %} <div class="card-btn"><a class="btn btn-primary" href="{% url 'product:cart_add' items.pk %}"><h3>افزودن به سبد خرید</h3></a></h3></div> {% endcomment %}
+            <input type="submit" value="افزودن به سبد خرید" class="btn btn-primary">
+        </form>
             <!-- change this for products -->
             <form method="post" action="{% url 'product:apply' %}">
                 {%csrf_token%}

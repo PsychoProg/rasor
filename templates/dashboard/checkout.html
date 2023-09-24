@@ -1,0 +1,12 @@
+<!-- templates/cart/checkout.html -->
+{% extends 'dashboard/base.html' %}
+
+{% block title %}checkout{% endblock %}
+
+{% block content %}
+  <h1>Checkout</h1>
+  <form action="{% url 'product:create_order' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Place Order">
+  </form>
+{% endblock %}
