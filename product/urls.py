@@ -9,11 +9,11 @@ urlpatterns = [
 
     # path('orders/<int:pk>/', views.OrderDetailView.as_view(), name='order_detail'),
     path('checkout/', views.CheckoutView.as_view(), name='create_order'),
-
-    path('order/delete/<int:pk>', views.clear_order, name="clear_order"),
-    path('apply/', views.apply, name="apply"), # delete for production
-    path('order/detail/<int:pk>/', views.order_detail, name='order_detail'),
+    path('order/<int:order_id>/delete/', views.clear_order, name='clear_order'),
+    path('order/detail/<int:order_id>', views.order_detail, name='order_detail'),
     # path('order/add/', views.create_order, name='create_order'),
+    
+    path('apply/', views.apply, name="apply"), # delete for production
 ]
 
 # Cart URLs

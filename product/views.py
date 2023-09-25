@@ -45,35 +45,6 @@ def product_detail(request, pk, slug):
 
 
 # =================================== Cart Views =================================== 
-# @login_required
-# def cart_add(request, id):
-#     cart = Cart(request)
-#     product = Product.objects.get(id=id)
-#     cart.add(product=product)
-#     return redirect("product:cart_detail")
-
-
-# @login_required
-# def item_clear(request, id):
-#     cart = Cart(request)
-#     product = Product.objects.get(id=id)
-#     cart.remove(product)
-#     return redirect("product:cart_detail")
-
-# @login_required
-# def cart_clear(request):
-#     cart = Cart(request)
-#     cart.clear()
-#     return redirect("product:cart_detail")
-
-
-# @login_required
-# def cart_detail(request):
-#     cart = Cart(request)
-#     context = {'cart': cart}
-#     return render(request, 'dashboard/cart_detail.html', context)
-
-
 class AddToCartView(LoginRequiredMixin, CartMixin, TemplateView):
     template_name='dashboard/cart_detail.html'
     def post(self, request, *args, **kwargs):
@@ -119,36 +90,22 @@ class CartView(CartMixin, TemplateView, LoginRequiredMixin):
     template_name='dashboard/cart_detail.html'
 
 # =================================== Order Views =================================== 
-# @login_required
-# def create_order(request):
-#     cart = Cart(request)
-#     # create order for current user
-#     # create order items from cart session
-#     if cart.total() > 0:
-#         order = Order.objects.create(user=request.user, price=cart.total())
-#         for item in cart:
-#             OrderItem.objects.create(order=order, product=item['product'], price=item['price'])
-#     else:
-#         # if cart was empty redirect to cart detail 
-#         return redirect('product:cart_detail')
-    
-#     cart.clear()
-#     return redirect('product:order_detail', order.id)
-
-    
-
 @login_required
-def order_detail(request, pk=None):
-    order = get_object_or_404(Order, id=pk)
+def order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
     context = {'order': order}
     # order.items.all >> in template
     return render(request, 'dashboard/order_detail.html', context)
 
+
 @login_required
-def clear_order(request, pk):
-    order = Order.objects.filter(pk=pk, user=request.user)
-    order.delete()
-    return redirect('product:cart_detail')
+def clear_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    if request.method == 'POST':
+        order.delete()
+        return redirect('product:cart_detail')
+    
+    
 
 
 class CheckoutView(LoginRequiredMixin, CartMixin, TemplateView):
@@ -184,14 +141,11 @@ class CheckoutView(LoginRequiredMixin, CartMixin, TemplateView):
             
         cart.clear()
         return redirect('product:order_detail', order_id=order.id)
-
-
-# class OrderDetailView(LoginRequiredMixin, CartMixin, DetailView):
-#     model = Order
-#     template_name = 'dashboard/order_detail.html'
-#     context_object_name = 'order'
-
-
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'ادامه فرایند خرید'
+        return context
 # =================================== Zarin Pal Views =================================== 
 #? sandbox merchant 
 if settings.SANDBOX:
