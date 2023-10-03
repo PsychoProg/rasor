@@ -2,11 +2,16 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from rasor.settings import settings 
 
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rasor.settings')
+    if settings.DEBUG:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rasor.settings.local')
+    else:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rasor.settings.production')
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
