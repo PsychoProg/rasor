@@ -55,6 +55,7 @@ def update_profile(request):
     return render(request, 'dashboard/update-profile.html', context)
 
 # =================================== Contact Us Views =================================== 
+@login_required
 def contact_view(request):
     form = CommentForm()
     context = {}
@@ -73,7 +74,7 @@ def contact_view(request):
                 contact_msg.save()
                 send_mail(
                     'Rasor Contatcs',
-                    f'From: {user.email}\n{user.username}\n\nSubject:{subject}\nMessage:\n{message}',
+                    f'پیام از: \n{user.email}\n{user.username}\n\nموضوع:\n{subject}\nمتن پیام:\n{message}',
                     settings.EMAIL_HOST_USER,
                     [admin_email],
                     fail_silently=False,
