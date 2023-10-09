@@ -79,7 +79,8 @@ WSGI_APPLICATION = 'rasor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rasor',
+        'NAME': 'rasor2',
+        # 'NAME': 'rasor',
         'USER': 'jcob', 
         'PASSWORD': 'PassWord',
         'HOST': 'localhost',        
