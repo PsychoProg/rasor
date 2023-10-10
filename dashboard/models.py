@@ -27,12 +27,19 @@ class Comments(models.Model):
         verbose_name_plural = 'نظرات'
 
 
+COURSE_TYPE = (
+    ('academics', 'اکادمیک'),
+    ('expriences', 'تجارب'),
+)
+
+
 class Course(models.Model):
     mentor = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='courses')
     title = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to='product/courses/%Y/')
     # price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
+    type = models.CharField(max_length=20, choices=COURSE_TYPE, default='exprience')
     price = models.PositiveBigIntegerField(validators=[MaxValueValidator(1001001000)])
 
     def __str__(self):

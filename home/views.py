@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from product.models import Product
 from .models import ListBox, News, PageContent1, PageContent2, ShareLinks, AboutUs
+from dashboard.models import Course 
+
 
 # =================================== Home View =================================== 
 def home_view(request):
@@ -53,3 +55,18 @@ def about_view(request):
         'links': links,
     }
     return render(request, 'home/about_us.html', context)
+
+# =================================== About Us ===================================
+def course_list(request, course_type):
+    # academics = Course.objects.filter(type='academics')
+    print('*'*20,'\n',course_type)
+    academics = Course.objects.filter(type=course_type)
+    
+    links = ShareLinks.objects.all()
+    context = {
+        'items': academics,
+        'links': links,
+        'course': True, 
+        'course_type': course_type,
+    }
+    return render(request, 'home/list.html', context)

@@ -155,4 +155,7 @@ class AddressView(View):
     return render(request, 'form.html', {'form': form})
 
 ==========================================================
+# generate django secrete key
+djecrety.ir 
+
 ==========================================================

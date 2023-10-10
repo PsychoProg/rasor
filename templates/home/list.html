@@ -18,8 +18,17 @@
                             <div class="container-slide container">
                                 <div class="row">
                                     <div class="col-md-6 col-md-offset-3 text-xs-right">
-                                        <h2 class="mbr-section-title display-1">لیست محصولات</h2>
-                                        <p class="mbr-section-lead lead">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
+                                        {% if course and course_type == 'academics' %}
+                                            <h2 class="mbr-section-title display-1">دوره های اکادمیک</h2>
+                                            <p class="mbr-section-lead lead">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
+                                        {% elif course and course_type == 'expriences' %}
+                                            {% comment %} <h2 class="mbr-section-title display-1">دوره های تجربی</h2> {% endcomment %}
+                                            <p class="mbr-section-lead lead">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
+                                        
+                                        {% else %}
+                                            <h2 class="mbr-section-title display-1">لیست محصولات</h2>
+                                            <p class="mbr-section-lead lead">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
+                                        {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -49,7 +58,13 @@
                     
                     
                     {% comment %} <h5 class="card-subtitle"></h5> {% endcomment %}
+                    {% if course %}
+                    <h5 class="card-subtitle"><span>مدرس:‌</span>{{ item.mentor.first_name }} {{ item.mentor.last_name }}</h5> 
+                        <p class="card-text">{{ item.description|markdown|truncatewords_html:30 }}</p>
+
+                    {% else %}
                     <p class="card-text">{{ item.content|markdown|truncatewords_html:30 }}</p>
+                    {% endif %}
                     <div class="card-btn"><a href="{{ item.get_absolute_url }}" class="btn btn-primary">بیشتر</a></div>
                     </div>
                 </div>
